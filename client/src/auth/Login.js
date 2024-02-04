@@ -24,7 +24,6 @@ export default function Login() {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const { dispatch } = useContext(AuthContext);
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const clickHandler = async (e) => {
@@ -36,19 +35,16 @@ export default function Login() {
       } else if (password === "") {
         toast.error("برجاء ادخال كلمه المرور ");
       } else {
-        setLoading(true);
         const res = await axios.post("http://localhost:3500/api/auth/login", {
           username,
           password,
         });
-        console.log(res);
         dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
         toast.success("مرحباً");
         navigate("/");
-        setLoading(false);
       }
     } catch (err) {
-      console.log(err);
+      toast.error(err.response.data);
     }
   };
 
@@ -66,10 +62,10 @@ export default function Login() {
             }}
           >
             <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}></Avatar>
-            <LockOutlinedIcon />            
-              <Typography component="h1" variant="h5">
-                تسجيل الدخول
-              </Typography>
+            <LockOutlinedIcon />
+            <Typography component="h1" variant="h5">
+              تسجيل الدخول
+            </Typography>
             <Box component="form" noValidate sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
@@ -99,24 +95,15 @@ export default function Login() {
                 control={<Checkbox value="remember" color="primary" />}
                 label="تذكرني"
               />
-              {loading === true ? (
-                <div class="lds-ellipsis">
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                </div>
-              ) : (
               <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
-                  onClick={clickHandler}
-                >
-                  تسجيل الدخول
-                </Button>
-              )}
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                onClick={clickHandler}
+              >
+                تسجيل الدخول
+              </Button>
               <Grid container>
                 <Grid item>
                   <Link href="/signup">ليس لديك حساب؟ إنشاء حساب</Link>

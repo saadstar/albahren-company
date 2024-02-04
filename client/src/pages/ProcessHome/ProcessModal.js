@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 
 export const ProcessModal = ({ setOpenModal }) => {
-  const navigate = useNavigate("");
   const [title, setTitle] = useState("");
   const addProcess = async (e) => {
     try {
@@ -14,7 +12,6 @@ export const ProcessModal = ({ setOpenModal }) => {
         });
         if (res?.status === 200) {
           setOpenModal(false);
-          navigate("/");
           toast.success(`تمت اضافه ${res.data.title} بنجاح  `);
         } else {
           toast.error(`!برجاء التحقق من الانترنت`);
