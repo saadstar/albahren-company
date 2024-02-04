@@ -1,0 +1,387 @@
+@import url('https://fonts.googleapis.com/css2?family=Mada:wght@300;400;500;700&display=swap');
+/* global rules  */
+:root {
+    --main-color: #3f330e;
+    --section-padding: 10px;
+}
+.analyicsDetails {
+    padding-bottom: var(--section-padding);
+    padding-top: var(--section-padding);
+    min-height: 100vh;
+    height: 100%;
+    position: relative;
+}
+.analyicsDetails .analyics-main-heading{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:#ddd;
+    padding-bottom: var(--section-padding);
+}
+.analyicsDetails .plans {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-gap: 30px;
+}
+
+.analyicsDetails .plans .plan .addPlan {
+    color: blue;
+    font-size: 100px;
+    font-weight: bold;
+}
+.analyicsDetails .plans .plan {
+    text-align: center;
+    background-color: #fcfcfc;
+    cursor: pointer;
+    color: #3f330e;
+}
+
+.analyicsDetails .plans .plan .head {
+    border-bottom: 1px solid var(--main-color);
+    border-top: 1px solid var(--main-color);
+    padding: 40px 20px;
+}
+
+.analyicsDetails .plan .head h3 {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 30px;
+    text-transform: uppercase;
+}
+
+.analyicsDetails .plan .head span {
+    font-size: 23px;
+    font-weight: normal;
+}
+.analyicsDetails .plans .plan ul {
+    border-bottom: 1px solid var(--main-color);
+}
+.analyicsDetails .plan ul li {
+    padding: 10px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.analyicsDetails .plan ul li h5 {
+    font-size: 21px;
+    font-weight: 600;
+}
+
+.analyicsDetails .plans .plan ul li:not(:last-child)::after {
+    content: "";
+    width: 100%;
+    height: 1px;
+    background-color: var(--main-color);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+}
+.analyicsDetails .contact-text {
+    text-align: center;
+    margin: 50px auto 20px;
+    font-size: 20px;
+}
+
+.analyicsDetails .contact-link {
+    display: block;
+    width: fit-content;
+    background-color: var(--main-color);
+    margin: 20px auto;
+    text-align: center;
+    text-decoration: none;
+    padding: 15px 30px;
+    color: white;
+}
+/* anlyicsReport */
+.anlyicsReport{
+    min-height: 100vh;
+}
+.report-title{
+    width: 100%;
+    background-color: white;
+    color: black;
+    text-align: center;
+    font-weight: bold;
+    font-size: 29px;
+    
+}
+/* inflicationBox */
+.inflicationMean{
+    background-color: rgba(239, 239, 15, 0.832);
+    padding: 5px;
+    border-radius: 10px;
+    color: black;
+}
+.inflicationMean p{
+    text-align: center;
+    font-size: 19px;
+}
+.inflicationBox{
+    padding: 10px;
+    border:  1px solid rgba(130, 129, 129, 0.666);
+    border-radius: 9px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    font-family: 'Mada', sans-serif;
+}
+.inflication{
+    border-bottom: 1px solid #ddd;
+}
+.inflicationFlex{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+.inflicationFlex:hover{
+    background-color: #ddd;
+    color: black;
+}
+.inflicationFlex h3{
+    letter-spacing: 1.5px;
+    font-size: 21px;
+    font-weight: 500;
+}
+.inflicationFlex p{
+    letter-spacing: 1.2px;
+    font-size: 19px;
+    font-weight: 500;
+}
+/* hr chart  */
+.hrChart{
+    width: 100%;
+    background-color: white;
+}
+.logo-holder {
+    background: #f2f2f2;
+    width: 180px;
+    height: 220px;
+    position: relative;
+    margin: 0 auto;
+    padding-top: 12px;
+    padding-bottom: 24px;
+    -webkit-transform: translateZ(0);
+}
+
+.bg {
+    position: absolute;
+    top: 9px;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    background: url(http://boutique.flarework.com/wp-content/themes/boutique/img/logo_large.png) center 0px no-repeat;
+    background-size: contain;
+    -webkit-filter: drop-shadow(0px 6px 25px rgba(0, 0, 0, 0.5));
+}
+
+.bar {
+    position: relative;
+    height: 8px;
+    background: #6a6a6a;
+    width: 0%;
+    top: 0px;
+    left: 18px;
+    margin-top: 8px;
+    box-shadow: 0 0 3px rgba(192, 192, 192, 0.9);
+    animation: fill 5s infinite alternate, colors 5s infinite alternate;
+}
+
+.bar.fill1 {
+    animation: fill-1 5s infinite alternate, colors 5s infinite alternate;
+}
+
+.bar.fill2 {
+    animation: fill-2 5s infinite alternate, colors 5s infinite alternate;
+}
+
+
+.bar.fill3 {
+    animation: fill-3 5s infinite alternate, colors 5s infinite alternate;
+}
+
+
+.bar.fill4 {
+    animation: fill-4 5s infinite alternate, colors 5s infinite alternate;
+}
+
+.bar.fill5 {
+    animation: fill-5 5s infinite alternate, colors 5s infinite alternate;
+}
+
+.bar.fill6 {
+    animation: fill-6 5s infinite alternate, colors 5s infinite alternate;
+}
+
+
+
+@keyframes fill {
+    0% {
+        width: 0;
+    }
+
+    33% {
+        width: 30px;
+    }
+
+    66% {
+        width: 10px;
+    }
+
+    100% {
+        width: 105px;
+    }
+}
+
+@keyframes fill-1 {
+    0% {
+        width: 0;
+    }
+
+    33% {
+        width: 50px;
+    }
+
+    66% {
+        width: 20px;
+    }
+
+    100% {
+        width: 130px;
+    }
+}
+
+@keyframes fill-2 {
+    0% {
+        width: 0;
+    }
+
+    33% {
+        width: 90px;
+    }
+
+    66% {
+        width: 70px;
+    }
+
+    100% {
+        width: 136px;
+    }
+}
+
+@keyframes fill-3 {
+    0% {
+        width: 0;
+    }
+
+    33% {
+        width: 50px;
+    }
+
+    66% {
+        width: 24px;
+    }
+
+    100% {
+        width: 109px;
+    }
+}
+
+@keyframes fill-4 {
+    0% {
+        width: 0;
+    }
+
+    33% {
+        width: 98px;
+    }
+
+    66% {
+        width: 34px;
+    }
+
+    100% {
+        width: 99px;
+    }
+}
+
+@keyframes fill-5 {
+    0% {
+        width: 0;
+    }
+
+    33% {
+        width: 30px;
+    }
+
+    66% {
+        width: 10px;
+    }
+
+    100% {
+        width: 148px;
+    }
+}
+
+
+@keyframes fill-6 {
+    0% {
+        width: 0;
+    }
+
+    33% {
+        width: 48px;
+    }
+
+    66% {
+        width: 22px;
+    }
+
+    100% {
+        width: 140px;
+    }
+}
+
+@keyframes colors {
+    0% {
+        background-color: #5a5a5a;
+    }
+
+    50% {
+        background-color: #3a3;
+    }
+
+    100% {
+        background-color: #6a6a6a;
+    }
+}
+@media only screen and (max-width:480px) {
+    .analyicsDetails .plans .plan .addPlan {
+            color: blue;
+            font-size: 60px;
+            font-weight: bold;
+            transform: translateY(0%);
+        }
+                .analyicsDetails .plans {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                    grid-gap: 30px;
+                }
+                                .myModal {
+                                    position: absolute;
+                                    padding: 25px;
+                                    border-radius: 10px;
+                                    background-color: #202e4e;
+                                    z-index: 2;
+                                }
+                                .myAddModal {
+                                    position: absolute;
+                                    padding: 25px;
+                                    border-radius: 10px;
+                                    background-color: #202e4e;
+                                    z-index: 2;
+                                    top: 5px !important;
+                                    width: 100%;
+                                }
+}

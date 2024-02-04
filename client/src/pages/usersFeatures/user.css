@@ -1,0 +1,131 @@
+      .users{
+        height: 100vh;
+      }
+      .users .info{
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 20px;
+        
+      }
+      .info button{
+        padding: 5px;
+        cursor: pointer;
+      }
+.dataGrid{
+       background-color: white;
+       padding: 20px; 
+      }
+.MuiDataGrid-toolbarContainer{ 
+    flex-direction: row-reverse;
+    align-items: center;
+}
+.dataTable img{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+#correct{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(24, 24, 24);
+}
+#wrong{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(67, 65, 65);
+    font-size: 14px;
+}
+.action{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+/* // add user componnet  */
+.add{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,0.724);
+}
+.modal{
+padding: 50px;
+border-radius: 10px;
+position: relative;
+background-color: #2a3447
+}
+.close{
+position: absolute;
+top: 10px;
+right: 10px;
+cursor: pointer;
+}
+
+.modal h1{
+    margin-bottom: 40px;
+    font-size: 24px;
+    color: #ddd;
+}
+form{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 500px;
+    justify-content: space-between;
+}
+.item{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.item >.label{
+    font-size: 14px;
+}
+.item >input{
+    padding: 10px;
+    background-color: transparent;
+    color: white;
+    outline: none;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+.addButton{
+    width: 100%;
+    padding: 10px;
+    cursor: pointer;
+}
+/* delelte */
+.deleteButtons{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.deleteButtons >button{
+    padding: 10px;
+    width: 45%;
+    cursor: pointer;
+    font-size: 19px;
+    font-weight: 500;
+}
+.deleteButton{
+    border: 1px solid rgb(200, 48, 48);
+    transition: 0,9s linear;
+    background-color: rgb(173, 61, 61);
+    color: white;
+}
+.deleteButton:hover{
+    border:1px solid white;
+    background-color: rgb(200, 48, 48);
+}
+.cancelButton:hover{
+    background-color: rgb(221, 122, 122);
+}
