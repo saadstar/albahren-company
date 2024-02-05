@@ -14,7 +14,7 @@ export const AddInsurance = ({ id, setAddOpen, type }) => {
     try {
       e.preventDefault();
       setLoading(true);
-      await axios.post(`http://localhost:3500/api/processDetailes`, {
+      await axios.post(`https://api.albahren.com/api/processDetailes`, {
         processId: id,
         type,
         note,

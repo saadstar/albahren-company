@@ -13,9 +13,12 @@ export const Funders = ({ ar }) => {
   const postCompanyName = async (e) => {
     try {
       e.preventDefault();
-      const res = await axios.post("http://localhost:3500/api/funderCompany", {
-        companyName,
-      });
+      const res = await axios.post(
+        "https://api.albahren.com/api/funderCompany",
+        {
+          companyName,
+        }
+      );
       res.status === 200 && toast.success("تم اضافه الممول بنجاح");
       setAddCompany(false);
     } catch (err) {
@@ -24,7 +27,7 @@ export const Funders = ({ ar }) => {
   };
   const fetchCompany = async () => {
     try {
-      const res = await axios.get("http://localhost:3500/api/funderCompany");
+      const res = await axios.get("https://api.albahren.com/api/funderCompany");
       setFunderCompanyData(res.data);
     } catch (err) {
       console.log(err);

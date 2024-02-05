@@ -7,7 +7,7 @@ export const DeleteTubes = ({ setDeleteOpen, deleteUserId }) => {
   const handleSubmit = async () => {
     try {
       await axios.delete(
-        `http://localhost:3500/api/processDetailes/${deleteUserId}`
+        `https://api.albahren.com/api/processDetailes/${deleteUserId}`
       );
       setDeleteOpen(false);
       toast.success("تم حذف العنصر بنجاح");

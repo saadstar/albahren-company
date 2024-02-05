@@ -90,7 +90,7 @@ export const Users = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:3500/api/auth/");
+        const res = await axios.get("https://api.albahren.com/api/auth/");
         setRowData(res.data);
       } catch (err) {
         console.log(err);

@@ -35,10 +35,13 @@ export default function Login() {
       } else if (password === "") {
         toast.error("برجاء ادخال كلمه المرور ");
       } else {
-        const res = await axios.post("http://localhost:3500/api/auth/login", {
-          username,
-          password,
-        });
+        const res = await axios.post(
+          "https://api.albahren.com/api/auth/login",
+          {
+            username,
+            password,
+          }
+        );
         dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
         toast.success("مرحباً");
         navigate("/");

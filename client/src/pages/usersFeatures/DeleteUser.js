@@ -7,7 +7,7 @@ export const DeleteUser = (props) => {
   const handleSubmit = async () => {
     try {
       await axios.delete(
-        `http://localhost:3500/api/auth/${props.deleteUserId}`
+        `https://api.albahren.com/api/auth/${props.deleteUserId}`
       );
       toast.success("تم حذف العنصر بنجاح");
     } catch (err) {

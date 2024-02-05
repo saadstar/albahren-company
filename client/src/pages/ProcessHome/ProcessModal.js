@@ -7,7 +7,7 @@ export const ProcessModal = ({ setOpenModal }) => {
   const addProcess = async (e) => {
     try {
       if (title !== "") {
-        const res = await axios.post("http://localhost:3500/api/process", {
+        const res = await axios.post("https://api.albahren.com/api/process", {
           title,
         });
         if (res?.status === 200) {

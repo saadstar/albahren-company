@@ -81,7 +81,7 @@ export const Insurance = ({ type, ar }) => {
   const fetchRow = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:3500/api/processDetailes/${id}`
+        `https://api.albahren.com/api/processDetailes/${id}`
       );
       const filteredData = res.data.filter((item) => {
         return item.type === type;

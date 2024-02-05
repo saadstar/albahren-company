@@ -184,7 +184,7 @@ export const ProcessDetails = () => {
   });
   const fetchProcessTitle = async () => {
     try {
-      const res = await axios.get(`http://localhost:3500/api/process/${id}`);
+      const res = await axios.get(`https://api.albahren.com/api/process/${id}`);
       setProcessTitle(res.data);
     } catch (err) {
       console.log(err);
@@ -193,7 +193,7 @@ export const ProcessDetails = () => {
   const fetchProcessValue = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:3500/api/processDetailes/${id}`
+        `https://api.albahren.com/api/processDetailes/${id}`
       );
       setProcessBand(res.data);
     } catch (err) {
@@ -206,7 +206,7 @@ export const ProcessDetails = () => {
   });
   const fetchProcess = async (e) => {
     try {
-      const res = await axios.get(`http://localhost:3500/api/process/${id}`);
+      const res = await axios.get(`https://api.albahren.com/api/process/${id}`);
       setProcessData(res.data);
     } catch (err) {
       console.log(err);
@@ -215,9 +215,12 @@ export const ProcessDetails = () => {
   const addIncomeProcess = async (e) => {
     try {
       e.preventDefault();
-      const res = await axios.put(`http://localhost:3500/api/process/${id}`, {
-        processIncome,
-      });
+      const res = await axios.put(
+        `https://api.albahren.com/api/process/${id}`,
+        {
+          processIncome,
+        }
+      );
       res.status === 200 && toast.success("تم اضافه الوارد بنجاح");
     } catch (err) {
       console.log(err);

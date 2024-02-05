@@ -10,7 +10,7 @@ export const ShowImg = ({ setShowImgOpen, showData }) => {
       <h1>{`صورة الايصال : `}</h1>
       {showData.filename !== undefined ? (
         <img
-          src={`http://localhost:3500/${showData.filename}`}
+          src={`https://api.albahren.com/${showData.filename}`}
           alt=""
           className="saveShowImgLimit"
         />

@@ -10,7 +10,7 @@ export const ProcessHome = () => {
 
   const fetchProcess = async () => {
     try {
-      const res = await axios.get("http://localhost:3500/api/process");
+      const res = await axios.get("https://api.albahren.com/api/process");
       setProcessData(res.data);
     } catch (err) {
       console.log(err);

@@ -33,12 +33,15 @@ export default function Signup() {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
     try {
-      const res = await axios.post("http://localhost:3500/api/auth/register", {
-        username,
-        password,
-        firstName,
-        lastName,
-      });
+      const res = await axios.post(
+        "https://api.albahren.com/api/auth/register",
+        {
+          username,
+          password,
+          firstName,
+          lastName,
+        }
+      );
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
       navigate("/");
       toast.success(" تم انشاء حسابك. ");

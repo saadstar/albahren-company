@@ -31,7 +31,7 @@ export const AddPrice = ({ setAddOpen, type, setOutOpen, outOpen }) => {
         formData.append("recived", recived);
         formData.append("proccessName", proccessName);
         const res = await axios.post(
-          "http://localhost:3500/api/save",
+          "https://api.albahren.com/api/save",
           formData
         );
         toast.success("تم بنجاح.");

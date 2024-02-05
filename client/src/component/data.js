@@ -119,7 +119,7 @@ export const menu = [
 let userData = 4;
 const fetchUserData = async () => {
   try {
-    const res = await axios.get("http://localhost:3500/api/auth/");
+    const res = await axios.get("https://api.albahren.com/api/auth/");
     return (userData = res.data.length);
   } catch (err) {
     console.log(err);

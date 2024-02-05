@@ -27,7 +27,7 @@ export const AddStore = ({ setAddOpen }) => {
         toast.warn("جاري رفع الصوره برجاء الانتظار...");
         setLoading(true);
         const res = await axios.post(
-          "http://localhost:3500/api/store",
+          "https://api.albahren.com/api/store",
           formData
         );
         setAddOpen(false);

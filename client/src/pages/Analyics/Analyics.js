@@ -10,7 +10,7 @@ export const Analyics = () => {
 
   const fetchAnalyicsData = async () => {
     try {
-      const res = await axios.get("http://localhost:3500/api/analyics");
+      const res = await axios.get("https://api.albahren.com/api/analyics");
       setAnalyicsData(res.data);
     } catch (err) {
       console.log(err);

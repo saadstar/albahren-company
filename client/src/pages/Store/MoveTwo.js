@@ -14,7 +14,7 @@ export const MoveTwo = ({ setEditOpen, editData }) => {
       e.preventDefault();
       setLoading(true);
       const res = await axios.put(
-        `http://localhost:3500/api/store/${editData.id}`,
+        `https://api.albahren.com/api/store/${editData.id}`,
         {
           ...editData,
           nameOne,
@@ -35,14 +35,14 @@ export const MoveTwo = ({ setEditOpen, editData }) => {
     try {
       e.preventDefault();
       setLoading(true);
-      await axios.put(`http://localhost:3500/api/store/${editData.id}`, {
+      await axios.put(`https://api.albahren.com/api/store/${editData.id}`, {
         ...editData,
         nameOne,
         nameTwo,
         quantityOut,
         exist: 2,
       });
-      await axios.post(`http://localhost:3500/api/store`, {
+      await axios.post(`https://api.albahren.com/api/store`, {
         ...editData,
         exist: 1,
         quantity: editData.quantity - quantityOut,

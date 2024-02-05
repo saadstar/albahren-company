@@ -16,7 +16,7 @@ export const AddDetails = ({ id, setAddOpen, sort }) => {
         toast.error("برجاء ادخال السعر");
       } else {
         setLoading(true);
-        await axios.post(`http://localhost:3500/api/processDetailes`, {
+        await axios.post(`https://api.albahren.com/api/processDetailes`, {
           processId: id,
           type: sort,
           note,

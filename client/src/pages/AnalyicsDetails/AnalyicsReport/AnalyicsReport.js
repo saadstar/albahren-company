@@ -14,7 +14,9 @@ export const AnalyicsReport = ({ dataNum }) => {
   const [loading, setLoading] = useState(false);
   const fetchAnalyicsData = async () => {
     try {
-      const res = await axios.get(`http://localhost:3500/api/analyics/${id}`);
+      const res = await axios.get(
+        `https://api.albahren.com/api/analyics/${id}`
+      );
       setAnalyicsData(res.data);
     } catch (err) {
       console.log(err);
@@ -27,7 +29,7 @@ export const AnalyicsReport = ({ dataNum }) => {
     try {
       setLoading(true);
       const res = await axios.get(
-        `http://localhost:3500/api/analyicsDetails/1/${id}`
+        `https://api.albahren.com/api/analyicsDetails/1/${id}`
       );
       setData1(res.data);
       setLoading(false);
@@ -39,7 +41,7 @@ export const AnalyicsReport = ({ dataNum }) => {
     try {
       setLoading(true);
       const res = await axios.get(
-        `http://localhost:3500/api/analyicsDetails/${dataNum}/${id}`
+        `https://api.albahren.com/api/analyicsDetails/${dataNum}/${id}`
       );
       setData2(res.data);
       setLoading(false);

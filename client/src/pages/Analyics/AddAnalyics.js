@@ -10,7 +10,7 @@ export const AddAnalyics = ({ setOpenAddAnalyics }) => {
   const addNewAnalyics = async (e) => {
     try {
       e.preventDefault();
-      const res = await axios.post("http://localhost:3500/api/analyics", {
+      const res = await axios.post("https://api.albahren.com/api/analyics", {
         title,
         type,
       });

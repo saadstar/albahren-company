@@ -15,7 +15,7 @@ export const OutStore = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:3500/api/store");
+        const res = await axios.get("https://api.albahren.com/api/store");
         setRowData(res.data);
       } catch (err) {
         console.log(err);
@@ -95,7 +95,7 @@ export const OutStore = () => {
           try {
             e.preventDefault();
             const res = await axios.put(
-              `http://localhost:3500/api/store/${params.row.id}`,
+              `https://api.albahren.com/api/store/${params.row.id}`,
               { exist: 1 }
             );
             res.status === 200 && toast.success("تمت الأعاده.");

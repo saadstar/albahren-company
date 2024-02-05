@@ -11,7 +11,7 @@ export const Out = ({ setOutOpen, editData }) => {
       e.preventDefault();
       setLoading(true);
       const res = await axios.put(
-        `http://localhost:3500/api/store/${editData.id}`,
+        `https://api.albahren.com/api/store/${editData.id}`,
         {
           ...editData,
           exist: 3,

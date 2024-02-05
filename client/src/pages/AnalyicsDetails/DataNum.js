@@ -11,7 +11,9 @@ export const DataNum = ({ dataNum, name }) => {
 
   const fetchAnalyicsData = async () => {
     try {
-      const res = await axios.get(`http://localhost:3500/api/analyics/${id}`);
+      const res = await axios.get(
+        `https://api.albahren.com/api/analyics/${id}`
+      );
       setAnalyicsData(res.data);
     } catch (err) {
       console.log(err);
@@ -23,7 +25,7 @@ export const DataNum = ({ dataNum, name }) => {
   const fetchDataWithDataNum = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:3500/api/analyicsDetails/${dataNum}/${id}`
+        `https://api.albahren.com/api/analyicsDetails/${dataNum}/${id}`
       );
       setDataOne(res.data);
     } catch (err) {

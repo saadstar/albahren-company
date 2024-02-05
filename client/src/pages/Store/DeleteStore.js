@@ -7,7 +7,7 @@ export const DeleteStore = ({ setDeleteOpen, deleteUserId }) => {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      await axios.delete(`http://localhost:3500/api/store/${deleteUserId}`);
+      await axios.delete(`https://api.albahren.com/api/store/${deleteUserId}`);
       toast.error("تم حذف العنصر ");
       setDeleteOpen(false);
     } catch (err) {

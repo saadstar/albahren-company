@@ -22,7 +22,7 @@ export const FunderDetails = () => {
   const fetchData = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:3500/api/funderDetails/${id}`
+        `https://api.albahren.com/api/funderDetails/${id}`
       );
       setRowData(res.data);
     } catch (err) {

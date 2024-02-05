@@ -13,11 +13,14 @@ export const AddFunder = ({ setAddOpen, id }) => {
   const addFunderDetails = async (e) => {
     try {
       e.preventDefault();
-      const res = await axios.post("http://localhost:3500/api/funderDetails", {
-        ...inputs,
-        value: inputs.quantity * inputs.price,
-        funderCompanyId: id,
-      });
+      const res = await axios.post(
+        "https://api.albahren.com/api/funderDetails",
+        {
+          ...inputs,
+          value: inputs.quantity * inputs.price,
+          funderCompanyId: id,
+        }
+      );
       res.status === 200 && toast.success("تمت اضافه بنجاح");
       setAddOpen(false);
     } catch (err) {

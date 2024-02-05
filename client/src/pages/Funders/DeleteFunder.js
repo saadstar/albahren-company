@@ -7,7 +7,7 @@ export const DeleteFunder = ({ setDeleteOpen, deleteUserId }) => {
     try {
       e.preventDefault();
       await axios.delete(
-        `http://localhost:3500/api/funderDetails/${deleteUserId}`
+        `https://api.albahren.com/api/funderDetails/${deleteUserId}`
       );
       toast.success("تم حذف العنصر بنجاح");
       setDeleteOpen(false);

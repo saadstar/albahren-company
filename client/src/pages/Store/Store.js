@@ -27,7 +27,7 @@ export const Store = ({ type }) => {
 
   const fetchData = async () => {
     try {
-      const res = await axios.get("http://localhost:3500/api/store");
+      const res = await axios.get("https://api.albahren.com/api/store");
       setRowData(res.data);
     } catch (err) {
       console.log(err);

@@ -14,7 +14,7 @@ export const AddSallery = ({ setOpenModal }) => {
   const addSalleryHandler = async (e) => {
     try {
       e.preventDefault();
-      const res = await axios.post(`http://localhost:3500/api/sallery`, {
+      const res = await axios.post(`https://api.albahren.com/api/sallery`, {
         name,
         role,
         salleryNum,

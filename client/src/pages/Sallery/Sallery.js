@@ -14,7 +14,7 @@ export const Sallery = () => {
   useEffect(() => {
     const fetchSallery = async () => {
       try {
-        const res = await axios.get("http://localhost:3500/api/sallery");
+        const res = await axios.get("https://api.albahren.com/api/sallery");
         setSalleryData(res.data);
       } catch (err) {
         console.log(err);
