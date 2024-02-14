@@ -3,6 +3,7 @@ import "./processHome.css";
 import { ProcessModal } from "./ProcessModal";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { LoadingPage } from "../../Loading/LoadingPage";
 
 export const ProcessHome = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -17,7 +18,7 @@ export const ProcessHome = () => {
     }
   };
   const openModalHandler = () => {
-    if (window.scrollY != 0) {
+    if (window.scrollY !== 0) {
       window.scrollTo(0, window.scrollY === 0);
     }
     setOpenModal(!openModal);
@@ -26,7 +27,10 @@ export const ProcessHome = () => {
     fetchProcess();
   });
   return (
-    <div className="processHome">
+   <> {
+      processData.length === 0 ? (
+   <LoadingPage/>
+   ):( <div className="processHome">
       {processData.map((item) => (
         <Link to={`/process/${item._id}`} key={item._id}>
           <div className="card">
@@ -39,6 +43,8 @@ export const ProcessHome = () => {
         <div className="addProcess">+</div>
       </div>
       {openModal && <ProcessModal setOpenModal={setOpenModal} />}
-    </div>
+    </div >)
+}
+    </>
   );
 };

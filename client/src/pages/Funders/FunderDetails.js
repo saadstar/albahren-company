@@ -119,7 +119,7 @@ export const FunderDetails = () => {
   return (
     <div className="contentContainer">
       <div className="funderHeader d-flex gap-4 mb-2">
-        <h1>الممولين</h1>
+        <h1>الموردين</h1>
         <button
           className="border-raduis-2 fw-bold"
           onClick={() => setAddOpen(!addOpen)}

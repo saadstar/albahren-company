@@ -19,7 +19,7 @@ export const Funders = ({ ar }) => {
           companyName,
         }
       );
-      res.status === 200 && toast.success("تم اضافه الممول بنجاح");
+      res.status === 200 && toast.success("تم اضافه المورد بنجاح");
       setAddCompany(false);
     } catch (err) {
       console.log(err);
@@ -60,13 +60,13 @@ export const Funders = ({ ar }) => {
                 class="btn btn-outline-success"
                 onClick={() => setAddCompany(true)}
               >
-                اضف ممول
+                اضف مورد
               </button>
             </div>
           </div>
         </div>
         {ar === "برجاء اختيار شركه التمويل. " ? (
-          <h1>برجاء اختيار شركه التمويل. </h1>
+          <h1>برجاء اختيار شركه التوريد. </h1>
         ) : (
           <FunderDetails />
         )}

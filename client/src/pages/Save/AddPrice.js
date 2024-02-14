@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "./save.css";
 
 export const AddPrice = ({ setAddOpen, type, setOutOpen, outOpen }) => {
-  const [file, setFile] = useState(undefined);
+  // const [file, setFile] = useState(undefined);
   const [recived, setRecived] = useState("");
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
@@ -18,13 +18,10 @@ export const AddPrice = ({ setAddOpen, type, setOutOpen, outOpen }) => {
     try {
       e.preventDefault();
       /// validation
-      if (file === undefined) {
-        toast.error("برجاء ادخال ايصال العهده الماليه .");
-      } else {
         const formData = new FormData();
         setLoading(true);
-        toast.warn("جاري رفع الصوره برجاء الانتظار...");
-        formData.append("file", file);
+        // toast.warn("جاري رفع الصوره برجاء الانتظار...");
+        // formData.append("file", file);
         formData.append("name", name);
         formData.append("out", out);
         formData.append("inn", inn);
@@ -39,7 +36,7 @@ export const AddPrice = ({ setAddOpen, type, setOutOpen, outOpen }) => {
         setLoading(false);
         type === "out" && setOutOpen(false);
         res.status === 200 && navigate("/save");
-      }
+      
     } catch (err) {
       console.log(err);
     }
@@ -97,10 +94,10 @@ export const AddPrice = ({ setAddOpen, type, setOutOpen, outOpen }) => {
               onChange={(e) => setProccessName(e.target.value)}
             />
           </div>
-          <div className="formItem">
+          {/* <div className="formItem">
             <label htmlFor="img">صورة ايصال العهده الماليه : </label>
             <input type="file" onChange={(e) => setFile(e.target.files[0])} />
-          </div>
+          </div> */}
           {loading === true ? (
             <span className="loader"></span>
           ) : (
@@ -120,10 +117,10 @@ export const AddPrice = ({ setAddOpen, type, setOutOpen, outOpen }) => {
               onChange={(e) => setIn(e.target.value)}
             />
           </div>
-          <div className="formItem">
+          {/* <div className="formItem">
             <label htmlFor="img">صورة ايصال استلام المبلغ : </label>
             <input type="file" onChange={(e) => setFile(e.target.files[0])} />
-          </div>
+          </div> */}
           {loading === true ? (
             <span className="loader"></span>
           ) : (

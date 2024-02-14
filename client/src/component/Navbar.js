@@ -121,7 +121,7 @@ export const Navbar = () => {
                     style={{ textDecoration: "none", color: "white" }}
                     className="nav-item d-flex gap-2"
                   >
-                    <h2>الممولين</h2>
+                    <h2>الموردين</h2>
                     <PaidIcon className="m-auto" />
                   </Link>
                 <Link

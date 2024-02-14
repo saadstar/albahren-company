@@ -6,6 +6,7 @@ import { AddPrice } from "./AddPrice";
 import { ShowImg } from "./ShowImg";
 import { DeleteSave } from "./DeleteSave";
 import { AuthContext } from "../../auth/authContext/authContext";
+import { LoadingPage } from "../../Loading/LoadingPage";
 
 export const Save = () => {
   const [addOpen, setAddOpen] = useState(false);
@@ -22,7 +23,7 @@ export const Save = () => {
   let totalArr = [];
   let totalOutArr = [];
   const filteredRecivedData = rowData.filter((item) => {
-    return search === "" ? item : (item.proccessName = search);
+    return search === "" ? item : item.proccessName === search;
   });
 
   const totalValue = () => {
@@ -103,7 +104,7 @@ export const Save = () => {
       width: 110,
       renderCell: (params) => {
         const showHandler = () => {
-          if (window.scrollY != 0) {
+          if (window.scrollY !== 0) {
             window.scrollTo(0, window.scrollY === 0);
           }
           setShowData(params.row);
@@ -132,7 +133,7 @@ export const Save = () => {
       width: 60,
       renderCell: (params) => {
         const deleteHandler = () => {
-          if (window.scrollY != 0) {
+          if (window.scrollY !== 0) {
             window.scrollTo(0, window.scrollY === 0);
           }
           setDeleteUserId(params.row.id);
@@ -202,9 +203,7 @@ export const Save = () => {
           </button>
         </div>
         {filteredRecivedData.length === 0 ? (
-          <div class="d-flex fw-bold fz-5 text-center justify-center ">
-            لا يوجد عناصر
-          </div>
+          <LoadingPage/>
         ) : (
           <>
             <div className="dataTable">

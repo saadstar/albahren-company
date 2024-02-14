@@ -3,10 +3,7 @@ const Save = require("../modals/SaveModel");
 
 const createSaveItem = asyncHandler(async (req, res) => {
     try {
-        const newSaveItem = new Save({
-          ...req.body,
-          filename: req.file.filename,
-        });
+        const newSaveItem = new Save(req.body);
         const savedSaveItem = await newSaveItem.save();
         res.status(200).json(savedSaveItem);
     } catch (err) {
