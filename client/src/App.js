@@ -21,7 +21,6 @@ import Login from "./auth/Login";
 import Signup from "./auth/Signup";
 import { Funders } from "./pages/Funders/Funders";
 import { OutStore } from "./pages/Store/OutStore";
-import { Wood } from "./pages/processDtails/products/Wood/Wood";
 import { Sallery } from "./pages/Sallery/Sallery";
 import { Analyics } from "./pages/Analyics/Analyics";
 import { AnalyicsDetails } from "./pages/AnalyicsDetails/AnalyicsDetails";
@@ -38,6 +37,7 @@ function App() {
       setLoading(false);
     }, 3000);
   }, []);
+
   return (
     <div className="">
       <div className="main">
@@ -60,11 +60,15 @@ function App() {
               <Route path="/process/:id" element={<ProcessDetails />} />
               <Route
                 path="/processDetails/tubes/:id"
-                element={<Tubes type="tubes" />}
+                element={<Tubes type="tubes" ar='المواسير' />}
               />
               <Route
                 path="/processDetails/worker/:id"
-                element={<Tubes type="worker" />}
+                element={<Tubes type="worker" ar='المصناعيه' />}
+              />
+              <Route
+                path="/processDetails/wood/:id"
+                element={<Tubes type="wood" ar='الخشب' />}
               />
               <Route
                 path="/processDetails/sand/:id"
@@ -98,7 +102,6 @@ function App() {
                 path="/processDetails/azl/:id"
                 element={<Details sort="azl" ar="عزل" />}
               />
-              <Route path="/processDetails/wood/:id" element={<Wood />} />
               <Route
                 path="/processDetails/workerInsurance/:id"
                 element={

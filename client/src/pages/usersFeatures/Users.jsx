@@ -87,15 +87,15 @@ export const Users = () => {
       status: item.isAdmin,
     };
   });
+  const fetchData = async () => {
+    try {
+      const res = await axios.get("https://api.albahren.com/api/auth/");
+      setRowData(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get("https://api.albahren.com/api/auth/");
-        setRowData(res.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
     fetchData();
   }, [rowData.id]);
   return (

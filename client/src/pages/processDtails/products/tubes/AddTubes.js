@@ -62,7 +62,7 @@ export const AddTubes = ({ id, setAddOpen, type }) => {
           />
         </div>
         <div className="formItem">
-          <label htmlFor="quantity">الكميه:</label>
+          <label htmlFor="quantity">{ type ==='worker'?"الدفعه :":"الكميه :"}</label>
           <input
             name="quantity"
             placeholder="ادخل الكميه بالمتر"

@@ -6,8 +6,9 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { AddTubes } from "./AddTubes";
 import { DeleteTubes } from "./DeleteTubes";
+import { LoadingPage } from "../../../../Loading/LoadingPage";
 
-export const Tubes = ({ type }) => {
+export const Tubes = ({ type, ar }) => {
   const [rowData, setRowData] = useState([]);
   const [addOpen, setAddOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
@@ -72,12 +73,19 @@ export const Tubes = ({ type }) => {
       width: 250,
       editable: false,
     },
-    {
-      field: "quantity",
-      headerName: "الكميه",
-      width: 120,
-      editable: false,
-    },
+    type === "worker"
+      ? {
+          field: "quantity",
+          headerName: "الدفعه",
+          width: 120,
+          editable: false,
+        }
+      : {
+          field: "quantity",
+          headerName: "الكميه",
+          width: 120,
+          editable: false,
+        },
     {
       field: "price",
       headerName: "سعر المتر",
@@ -115,62 +123,11 @@ export const Tubes = ({ type }) => {
         );
       },
     },
-  ];
-  const WorkerColumns = [
-    {
-      field: "note",
-      headerName: "اسم البيان",
-      width: 250,
-      editable: false,
-    },
-    {
-      field: "quantity",
-      headerName: "الكميه",
-      width: 100,
-      editable: false,
-    },
-    {
-      field: "price",
-      headerName: "سعر المتر",
-      type: "number",
-      width: 100,
-      editable: true,
-    },
-    {
+    type === "worker" && {
       field: "other",
       headerName: "الصنايعي",
       width: 150,
       editable: false,
-    },
-    {
-      field: "value",
-      headerName: "اجمالي",
-      width: 180,
-    },
-    {
-      field: "createdAt",
-      headerName: "التاريخ",
-      width: 120,
-    },
-    {
-      field: "Action",
-      headerName: "حذف",
-      width: 60,
-      renderCell: (params) => {
-        const deleteHandler = () => {
-          setDeleteUserId(params.row.id);
-          setDeleteOpen(true);
-        };
-        return (
-          <div className="action">
-            <i
-              class="fa-solid fa-trash"
-              style={{ color: "red", fontSize: "20px" }}
-              onClick={deleteHandler}
-            ></i>
-          </div>
-        );
-      },
     },
   ];
   const rows = searchFilteredData.reverse().map((item) => {
@@ -205,35 +162,34 @@ export const Tubes = ({ type }) => {
         </div>
         <div className="contentContainer">
           <div className="tubesHeader">
-            <h1>{type === "tubes" ? "مواسير" : "مصناعيه"}</h1>
+            <h1>{ar}</h1>
             <button className="" onClick={() => setAddOpen(!addOpen)}>
-              أضافه {type === "tubes" ? "مواسير" : "مصناعيه"}
+              أضافه {ar}
             </button>
           </div>
-          <div class="d-flex pb-2" role="search">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="أبحث بالعنصر"
-              aria-label="Search"
-              onChange={(e) => setSearch(e.target.value)}
-            />
-            <button class="btn btn-success" type="submit">
-              أبحث
-            </button>
-          </div>
+          {type === "worker" && (
+            <div class="d-flex pb-2" role="search">
+              <input
+                class="form-control me-2"
+                type="search"
+                placeholder="أبحث بالعنصر"
+                aria-label="Search"
+                onChange={(e) => setSearch(e.target.value)}
+              />
+            </div>
+          )}
           {rowData.length === 0 ? (
-            <div class="">لا يوجد عناصر</div>
+            <LoadingPage />
           ) : (
             <div className="dataTable">
               <DataGrid
                 className="dataGrid"
                 rows={rows}
-                columns={type === "tubes" ? columns : WorkerColumns}
+                columns={columns}
                 initialState={{
                   pagination: {
                     paginationModel: {
-                      pageSize: 99,
+                      pageSize: 90,
                     },
                   },
                 }}
