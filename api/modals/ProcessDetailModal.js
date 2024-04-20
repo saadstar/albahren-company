@@ -20,6 +20,18 @@ const ProcessDetailsSchema = new Schema(
     price: {
       type: Number,
     },
+    rPrice: {
+      type: Number,
+    },
+    mPrice: {
+      type: Number,
+    },
+    aPrice: {
+      type: Number,
+    },
+    khPrice: {
+      type: Number,
+    },
     note: {
       type: String,
     },

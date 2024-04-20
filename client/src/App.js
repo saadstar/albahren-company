@@ -28,6 +28,7 @@ import { AnalyicsReport } from "./pages/AnalyicsDetails/AnalyicsReport/AnalyicsR
 import { LandingHome } from "./component/LandingHome/LandingHome";
 import { Insurance } from "./pages/processDtails/products/Insurance/Insurance";
 import { LoadingPage } from "./Loading/LoadingPage";
+import { Rooms } from "./pages/processDtails/products/roomsDetails/Rooms";
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -101,6 +102,10 @@ function App() {
               <Route
                 path="/processDetails/azl/:id"
                 element={<Details sort="azl" ar="عزل" />}
+              />
+              <Route
+                path="/processDetails/rooms/:id"
+                element={<Rooms type="rooms" ar="غرف" />}
               />
               <Route
                 path="/processDetails/workerInsurance/:id"

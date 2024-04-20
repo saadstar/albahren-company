@@ -92,6 +92,16 @@ export const Menu = () => {
         </div>
       </Link>
       <Link
+        to={`/processDetails/rooms/${id}`}
+        style={{ textDecoration: "none" }}
+        className="wTen"
+      >
+        <div className="item listItem">
+          <div className="itemTitle">غرف</div>
+          <RoofingIcon id="none" />
+        </div>
+      </Link>
+      <Link
         to={`/processDetails/transport/${id}`}
         style={{ textDecoration: "none" }}
         className="wTen"
@@ -138,7 +148,7 @@ export const Menu = () => {
       >
         <div className="item listItem">
           <div className="itemTitle">التأمين الابتدائي</div>
-          <AccountBalanceWalletIcon id='none'/>
+          <AccountBalanceWalletIcon id="none" />
         </div>
       </Link>
       <Link
@@ -148,7 +158,7 @@ export const Menu = () => {
       >
         <div className="item listItem">
           <div className="itemTitle">التأمين الاستحقاقي </div>
-          <AccountTreeIcon id='none'/>
+          <AccountTreeIcon id="none" />
         </div>
       </Link>
     </div>
