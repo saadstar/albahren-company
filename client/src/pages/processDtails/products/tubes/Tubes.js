@@ -72,15 +72,7 @@ export const Tubes = ({ type, ar }) => {
       headerName: "اسم البيان",
       width: 250,
       editable: false,
-    },
-    type === "worker"
-      ? {
-          field: "quantity",
-          headerName: "الدفعه",
-          width: 120,
-          editable: false,
-        }
-      : {
+    }, {
           field: "quantity",
           headerName: "الكميه",
           width: 120,

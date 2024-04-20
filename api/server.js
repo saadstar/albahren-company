@@ -5,6 +5,7 @@ const env = require("dotenv").config();
 const connectDB = require("./config/dbConnection");
 const processRoute = require("./routes/processRoute");
 const processDetailsRoute = require("./routes/processDetailsRoute");
+const processDetailsRoomRoute = require("./routes/processDetailsRoomRoute");
 const storeRoute = require("./routes/storeRoute");
 const saveRoute = require("./routes/saveRoute");
 const authRoute = require("./routes/authRoute");
@@ -26,6 +27,7 @@ app.use(cookieParser());
 
 app.use("/api/process", processRoute);
 app.use("/api/processDetailes", processDetailsRoute);
+app.use("/api/processDetailesRoom", processDetailsRoomRoute);
 app.use("/api/store", storeRoute);
 app.use("/api/save", saveRoute);
 app.use("/api/auth/", authRoute);
