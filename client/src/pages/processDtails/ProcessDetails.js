@@ -25,6 +25,7 @@ export const ProcessDetails = () => {
   const repairValue = [];
   const woodValue = [];
   const roomsValue = [];
+  const salleryValue = [];
   const [tubesTotal, setTubesTotal] = useState(0);
   const [sandTotal, setSandTotal] = useState(0);
   const [senTotal, setSenTotal] = useState(0);
@@ -37,6 +38,7 @@ export const ProcessDetails = () => {
   const [repairTotal, setRepairTotal] = useState(0);
   const [woodTotal, setWoodTotal] = useState(0);
   const [roomsTotal, setRoomsTotal] = useState(0);
+  const [salleryTotal, setSalleryTotal] = useState(0);
   const overTotal =
     tubesTotal +
     sandTotal +
@@ -49,7 +51,8 @@ export const ProcessDetails = () => {
     transportTotal +
     repairTotal +
     woodTotal +
-    roomsTotal;
+    roomsTotal +
+    salleryTotal;
   const mine = processBand.map((item) => {
     if (item.type === "tubes") {
       tubesValue.push(item.value);
@@ -75,6 +78,8 @@ export const ProcessDetails = () => {
       woodValue.push(item.value);
     } else if (item.type === "rooms") {
       roomsValue.push(item.value);
+    } else if (item.type === "sallery") {
+      salleryValue.push(item.value);
     }
   });
   const sumTypeValue = () => {
@@ -197,6 +202,16 @@ export const ProcessDetails = () => {
   useEffect(() => {
     sumRoomsValue();
   });
+   const sumSalleryValue = () => {
+     let sum = 0;
+     for (let i = 0; i < salleryValue.length; i++) {
+       sum += salleryValue[i];
+     }
+     setSalleryTotal(sum);
+   };
+   useEffect(() => {
+     sumSalleryValue();
+   });
   const fetchProcessTitle = async () => {
     try {
       const res = await axios.get(`https://api.albahren.com/api/process/${id}`);
@@ -309,6 +324,10 @@ export const ProcessDetails = () => {
               <tr>
                 <td>خشب</td>
                 <td>{Math.round(woodTotal)}</td>
+              </tr>
+              <tr>
+                <td>المرتبات</td>
+                <td>{Math.round(salleryTotal)}</td>
               </tr>
               <tr className="tabletHeader">
                 <th className="band">اجمالي العمليه</th>

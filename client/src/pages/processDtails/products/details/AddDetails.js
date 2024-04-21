@@ -40,29 +40,62 @@ export const AddDetails = ({ id, setAddOpen, sort }) => {
       </span>
       <h1>{`أضافه عنصر جديد`}</h1>
       <form onSubmit={(e) => e.preventDefault}>
-        <div className="formItem">
-          <label htmlFor="notes">اسم البيان: </label>
-          {note === "" && (
-            <span style={{ color: "red", fontSize: "10px", fontWeight: "300" }}>
-              برجاء ادخل البيان
-            </span>
-          )}
-          <input
-            name="notes"
-            placeholder={"مثل:شحم حبل الخ.. "}
-            type="text"
-            onChange={(e) => setNote(e.target.value)}
-          />
-        </div>
-        <div className="formItem">
-          <label htmlFor="price">المدفوع: </label>
-          <input
-            name="price"
-            placeholder="ادخل المدفوع بالجنيه"
-            type="number"
-            onChange={(e) => setPrice(e.target.value)}
-          />
-        </div>
+        {sort === "sallery" ? (
+          <div className="formItem">            
+            <label htmlFor="notes">اسم الموظف: </label>
+            {note === "" && (
+              <span
+                style={{ color: "red", fontSize: "10px", fontWeight: "300" }}
+              >
+                برجاء ادخل البيان
+              </span>
+            )}
+            <input
+              name="notes"
+              placeholder={"ادخل اسم الموظف"}
+              type="text"
+              onChange={(e) => setNote(e.target.value)}
+            />
+          </div>
+        ) : (
+          <div className="formItem">
+            <label htmlFor="notes">اسم البيان: </label>
+            {note === "" && (
+              <span
+                style={{ color: "red", fontSize: "10px", fontWeight: "300" }}
+              >
+                برجاء ادخل البيان
+              </span>
+            )}
+            <input
+              name="notes"
+              placeholder={"مثل:شحم حبل الخ.. "}
+              type="text"
+              onChange={(e) => setNote(e.target.value)}
+            />
+          </div>
+        )}
+        {sort === "sallery" ? (
+          <div className="formItem">
+            <label htmlFor="price">المرتب : </label>
+            <input
+              name="price"
+              placeholder="ادخل المدفوع بالجنيه"
+              type="number"
+              onChange={(e) => setPrice(e.target.value)}
+            />
+          </div>
+        ) : (
+          <div className="formItem">
+            <label htmlFor="price">القيمه : </label>
+            <input
+              name="price"
+              placeholder="ادخل المدفوع بالجنيه"
+              type="number"
+              onChange={(e) => setPrice(e.target.value)}
+            />
+          </div>
+        )}
         {loading === true ? (
           <div class="lds-ellipsis">
             <div></div>

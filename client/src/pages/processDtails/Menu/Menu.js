@@ -102,6 +102,16 @@ export const Menu = () => {
         </div>
       </Link>
       <Link
+        to={`/processDetails/sallery/${id}`}
+        style={{ textDecoration: "none" }}
+        className="wTen"
+      >
+        <div className="item listItem">
+          <div className="itemTitle">المرتبات</div>
+          <RoofingIcon id="none" />
+        </div>
+      </Link>
+      <Link
         to={`/processDetails/transport/${id}`}
         style={{ textDecoration: "none" }}
         className="wTen"

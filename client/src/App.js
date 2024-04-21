@@ -61,15 +61,15 @@ function App() {
               <Route path="/process/:id" element={<ProcessDetails />} />
               <Route
                 path="/processDetails/tubes/:id"
-                element={<Tubes type="tubes" ar='المواسير' />}
+                element={<Tubes type="tubes" ar="المواسير" />}
               />
               <Route
                 path="/processDetails/worker/:id"
-                element={<Tubes type="worker" ar='المصناعيه' />}
+                element={<Tubes type="worker" ar="المصناعيه" />}
               />
               <Route
                 path="/processDetails/wood/:id"
-                element={<Tubes type="wood" ar='الخشب' />}
+                element={<Tubes type="wood" ar="الخشب" />}
               />
               <Route
                 path="/processDetails/sand/:id"
@@ -106,6 +106,10 @@ function App() {
               <Route
                 path="/processDetails/rooms/:id"
                 element={<Rooms type="rooms" ar="غرف" />}
+              />
+              <Route
+                path="/processDetails/sallery/:id"
+                element={<Details sort="sallery" ar="المرتبات" />}
               />
               <Route
                 path="/processDetails/workerInsurance/:id"
