@@ -24,6 +24,7 @@ export const ProcessDetails = () => {
   const transportValue = [];
   const repairValue = [];
   const woodValue = [];
+  const roomsValue = [];
   const [tubesTotal, setTubesTotal] = useState(0);
   const [sandTotal, setSandTotal] = useState(0);
   const [senTotal, setSenTotal] = useState(0);
@@ -35,6 +36,7 @@ export const ProcessDetails = () => {
   const [transportTotal, setTransportTotal] = useState(0);
   const [repairTotal, setRepairTotal] = useState(0);
   const [woodTotal, setWoodTotal] = useState(0);
+  const [roomsTotal, setRoomsTotal] = useState(0);
   const overTotal =
     tubesTotal +
     sandTotal +
@@ -46,7 +48,8 @@ export const ProcessDetails = () => {
     azlTotal +
     transportTotal +
     repairTotal +
-    woodTotal;
+    woodTotal +
+    roomsTotal;
   const mine = processBand.map((item) => {
     if (item.type === "tubes") {
       tubesValue.push(item.value);
@@ -70,6 +73,8 @@ export const ProcessDetails = () => {
       azlValue.push(item.value);
     } else if (item.type === "wood") {
       woodValue.push(item.value);
+    } else if (item.type === "rooms") {
+      roomsValue.push(item.value);
     }
   });
   const sumTypeValue = () => {
@@ -182,6 +187,16 @@ export const ProcessDetails = () => {
   useEffect(() => {
     sumWoodValue();
   });
+  const sumRoomsValue = () => {
+    let sum = 0;
+    for (let i = 0; i < roomsValue.length; i++) {
+      sum += roomsValue[i];
+    }
+    setRoomsTotal(sum);
+  };
+  useEffect(() => {
+    sumRoomsValue();
+  });
   const fetchProcessTitle = async () => {
     try {
       const res = await axios.get(`https://api.albahren.com/api/process/${id}`);
@@ -278,6 +293,10 @@ export const ProcessDetails = () => {
               <tr>
                 <td>عزل</td>
                 <td>{Math.round(azlTotal)}</td>
+              </tr>
+              <tr>
+                <td>غرف</td>
+                <td>{Math.round(roomsTotal)}</td>
               </tr>
               <tr>
                 <td>انتقالات مواقع</td>

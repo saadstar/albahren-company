@@ -6,19 +6,20 @@ import { toast } from "react-toastify";
 export const AddRoom = ({ id, setAddOpen, type }) => {
   const [note, setNote] = useState("");
   const [quantity, setQuantity] = useState(0);
+  const [precentage, setPrecentage] = useState(0);
   const [price, setPrice] = useState(0);
   const [other, setOther] = useState("");
+  const [rPrice, setRPrice] = useState(0);
+  const [mPrice, setMPrice] = useState(0);
+  const [aPrice, setAPrice] = useState(0);
+  const [khPrice, setKhPrice] = useState(0);
   const [loading, setLoading] = useState(false);
-
+  
   const handleAdd = async (e) => {
     try {
       e.preventDefault();
       if (note === "") {
         toast.error("برجاء ادخال اسم البيان");
-      } else if (quantity === 0) {
-        toast.error("برجاء ادخال الكميه");
-      } else if (price === 0) {
-        toast.error("برجاء ادخال السعر");
       } else {
         setLoading(true);
         await axios.post(`https://api.albahren.com/api/processDetailes`, {
@@ -27,8 +28,13 @@ export const AddRoom = ({ id, setAddOpen, type }) => {
           note,
           quantity,
           price,
+          precentage,
+          rPrice,
+          mPrice,
+          aPrice,
+          khPrice,
           other,
-          value: price * quantity,
+          value:Math.round(quantity)  + Math.round(price) + Math.round(precentage) + Math.round(rPrice) + Math.round(mPrice) + Math.round(aPrice) + Math.round(khPrice),
         });
         setLoading(false);
         setAddOpen(false);
@@ -45,7 +51,7 @@ export const AddRoom = ({ id, setAddOpen, type }) => {
       <span className="close" onClick={() => setAddOpen(false)}>
         X
       </span>
-      <h1>{`أضافه عنصر جديد`}</h1>
+      <h1>{`أضافه غرفه جديد`}</h1>
       <form onSubmit={(e) => e.preventDefault}>
         <div className="formItem">
           <label htmlFor="notes">اسم البيان: </label>
@@ -62,32 +68,75 @@ export const AddRoom = ({ id, setAddOpen, type }) => {
           />
         </div>
         <div className="formItem">
-          <label htmlFor="quantity">{ type ==='worker'?"الدفعه :":"الكميه :"}</label>
+          <label htmlFor="quantity">سعر الحديد الكلي</label>
           <input
             name="quantity"
-            placeholder="ادخل الكميه بالمتر"
+            placeholder="ادخل اجمالي سعر الحديد"
             type="number"
             onChange={(e) => setQuantity(e.target.value)}
           />
         </div>
-        {type === "worker" && (
-          <div className="formItem">
-            <label htmlFor="other">اسم الصنايعي :</label>
-            <input
-              name="other"
-              placeholder="ادخل  اسم الصنايعي"
-              type="twxt"
-              onChange={(e) => setOther(e.target.value)}
-            />
-          </div>
-        )}
         <div className="formItem">
-          <label htmlFor="price">السعر:</label>
+          <label htmlFor="cement">سعر الاسمنت الكلي</label>
           <input
-            name="price"
-            placeholder="ادخل السعر المتر الواحد"
+            name="cement"
+            placeholder="ادخل اجمالي سعر الاسمنت"
+            type="number"
+            onChange={(e) => setPrecentage(e.target.value)}
+          />
+        </div>
+        <div className="formItem">
+          <label htmlFor="sen">سعر السن الكلي</label>
+          <input
+            name="sen"
+            placeholder="ادخل اجمالي سعر السن"
             type="number"
             onChange={(e) => setPrice(e.target.value)}
+          />
+        </div>
+        <div className="formItem">
+          <label htmlFor="rPrice">سعر الرمل الكلي</label>
+          <input
+            name="rPrice"
+            placeholder="ادخل اجمالي سعر الرمل"
+            type="number"
+            onChange={(e) => setRPrice(e.target.value)}
+          />
+        </div>
+        <div className="formItem">
+          <label htmlFor="mPrice">اجمالي مصروفات المصناعيه</label>
+          <input
+            name="mPrice"
+            placeholder="ادخل اجمالي سعر المصناعيه"
+            type="number"
+            onChange={(e) => setMPrice(e.target.value)}
+          />
+        </div>
+        <div className="formItem">
+          <label htmlFor="aPrice">اجمالي العزل</label>
+          <input
+            name="aPrice"
+            placeholder="ادخل اجمالي سعر العزل"
+            type="number"
+            onChange={(e) => setAPrice(e.target.value)}
+          />
+        </div>
+        <div className="formItem">
+          <label htmlFor="khPrice">اجمالي سعر الاغطيه</label>
+          <input
+            name="khPrice"
+            placeholder="ادخل اجمالي سعر الغطاء"
+            type="number"
+            onChange={(e) => setKhPrice(e.target.value)}
+          />
+        </div>
+        <div className="formItem">
+          <label htmlFor="other">نثريات</label>
+          <input
+            name="other"
+            placeholder="ما هي النثريات"
+            type="text"
+            onChange={(e) => setOther(e.target.value)}
           />
         </div>
         {loading === true ? (

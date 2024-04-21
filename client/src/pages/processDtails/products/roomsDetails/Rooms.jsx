@@ -22,21 +22,57 @@ export const Rooms = ({ type, ar }) => {
     {
       field: "note",
       headerName: "اسم البيان",
-      width: 250,
+      width: 150,
       editable: false,
-    }, {
+    },
+    {
           field: "quantity",
-          headerName: "الكميه",
-          width: 120,
+          headerName: "الحديد",
+          flex:1,
           editable: false,
         },
     {
-      field: "price",
-      headerName: "سعر المتر",
-      type: "number",
-      width: 120,
-      editable: true,
-    },
+          field: "precentage",
+          headerName: "الاسمنت",
+          flex:1,
+          editable: false,
+        },
+    {
+          field: "price",
+          headerName: "السن",
+          flex:1,
+          editable: false,
+        },
+    {
+          field: "rPrice",
+          headerName: "الرمل",
+          flex:1,
+          editable: false,
+        },
+    {
+          field: "mPrice",
+          headerName: "المصناعيه",
+          flex:1,
+          editable: false,
+        },
+    {
+          field: "aPrice",
+          headerName: "العزل",
+          flex:1,
+          editable: false,
+        },
+    {
+          field: "khPrice",
+          headerName: "الغطاء",
+          flex:1,
+          editable: false,
+        },
+    {
+          field: "other",
+          headerName: "نثريات",
+          flex:1,
+          editable: false,
+        },
     {
       field: "value",
       headerName: "اجمالي",
@@ -67,21 +103,20 @@ export const Rooms = ({ type, ar }) => {
         );
       },
     },
-    type === "worker" && {
-      field: "other",
-      headerName: "الصنايعي",
-      width: 150,
-      editable: false,
-    },
   ];
   const rows = FilteredData.reverse().map((item) => {
     return {
       id: item._id,
       note: item.note,
       quantity: item.quantity,
-      price: item.price,
+      precentage: item.precentage,
       value: item.value,
       other: item.other,
+      price: item.price,
+      rPrice: item.rPrice,
+      mPrice: item.mPrice,
+      aPrice: item.aPrice,
+      khPrice: item.khPrice,      
       createdAt: item.createdAt.split("T")[0],
     };
   });
