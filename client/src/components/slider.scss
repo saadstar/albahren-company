@@ -1,0 +1,68 @@
+.Slider {
+    width: 100%;
+    .slide {
+        .carousel-inner {
+            .carousel-item {
+                .vid {
+                    height: 60vh;
+                    width: 100% !important;
+                    object-fit: cover;
+                }
+
+                .play-button {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background-color: rgba(0, 0, 0, 0.5);
+                    color: white;
+                    border: none;
+                    padding: 10px 20px;
+                    cursor: pointer;
+                }
+
+                .carousel-caption {
+                    h3 {
+                        color: #fff;
+                        font-size: 40px;
+                        font-weight: 600;
+                        line-height: 1.2;
+                    }
+
+                    p {
+                        font-size: 20px;
+                        color: #fff;
+                        text-align: center;
+                    }
+                }
+            }
+        }
+
+        .carousel-control-prev {
+            height: 85%;
+        }
+
+        .carousel-control-next {
+            height: 85%;
+        }
+    }
+}
+
+// resposive Design
+@media only screen and (max-width:1040px) {
+    .Slider {
+        width: 100%;
+        height: 100%;
+        margin-top: 0px;
+
+        .slide {
+            .carousel-inner {
+                .carousel-item {
+                    .vid {
+                        height: 100vh;
+                    }
+                }
+            }
+        }
+    }
+}

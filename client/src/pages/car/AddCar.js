@@ -1,39 +1,43 @@
 import React, { useState } from "react";
-import "../modal.css";
 import axios from "axios";
 import { toast } from "react-toastify";
-import "../modal.css";
 
-export const AddCar = ({ setOpenModal }) => {
+export const AddCar = ({ setAddOpen }) => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [km, setKm] = useState(0);
   const [oil, setOil] = useState(0);
-  const [openOil, setOpenOil] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const addCarHandler = async (e) => {
     try {
       e.preventDefault();
-      const res = await axios.post(`https://api.eleaman.com/api/car`, {
-        name,
-        price,
-        km,
-        oil,
-      });
-      res.status === 200 && toast.success("تم اضافه التحرك بنجاح");
-      setOpenModal(false);
+      if (name === "برجاء اضافه اسم السائق") {
+        toast.error("");
+      } else if (price === 0) {
+        toast.error("برجاء اضافه السعر");
+      } else if (km === 0) {
+        toast.error("ادخل عدد الكيلوميترات");
+      } else {
+        setLoading(true);
+        const res = await axios.post(`https://api.albahren.com/api/car`, {
+          name,
+          price,
+          km,
+          oil,
+        });
+        res.status === 200 && toast.success("تم اضافه التحرك بنجاح");
+        setLoading(false);
+        setAddOpen(false);
+      }
     } catch (err) {
       console.log(err);
     }
   };
   return (
-    <div className="modalll">
-      <span className="close" onClick={() => setOpenModal(false)}>
-        X
-      </span>
-      <h1>{`أضافه تحرك سياره جديد`}</h1>
+    <div className="addWrapper">
       <form onSubmit={(e) => e.preventDefault}>
-        <div className="formItem">
+        <div className="inputContainer">
           <label htmlFor="name">اسم سائق : </label>
           <input
             name="name"
@@ -43,7 +47,7 @@ export const AddCar = ({ setOpenModal }) => {
             required
           />
         </div>
-        <div className="formItem">
+        <div className="inputContainer">
           <label htmlFor="price">سعر البنزين:</label>
           <input
             name="price"
@@ -53,7 +57,7 @@ export const AddCar = ({ setOpenModal }) => {
             onChange={(e) => setPrice(e.target.value)}
           />
         </div>
-        <div className="formItem">
+        <div className="inputContainer">
           <label htmlFor="km">عدد الكيلوميترات:</label>
           <input
             name="km"
@@ -63,33 +67,23 @@ export const AddCar = ({ setOpenModal }) => {
             onChange={(e) => setKm(e.target.value)}
           />
         </div>
-        <div className="mb-3">
-          <div class="form-check form-switch">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              role="switch"
-              id="flexSwitchCheckDefault"
-              onClick={(e) => setOpenOil(!openOil)}
-            />
-            <label class="form-check-label" for="flexSwitchCheckDefault">
-              أضافه تغير زيت
-            </label>
-          </div>
-          {openOil && (
-            <div className="formItem">
-              <label htmlFor="oil">سعر تغير الزيت :</label>
-              <input
-                name="oil"
-                type="number"
-                onChange={(e) => setOil(e.target.value)}
-              />
-            </div>
-          )}
+        <div className="inputContainer">
+          <label htmlFor="oil">سعر تغير الزيت :</label>
+          <input
+            placeholder="(اختياري)"
+            name="oil"
+            type="number"
+            onChange={(e) => setOil(e.target.value)}
+          />
         </div>
-        <button className="addButton" onClick={addCarHandler}>
-          أضافه
-        </button>
+        <div className="inputButtons">
+          <button className="doneBtn" onClick={addCarHandler}>
+            {loading === true ? "برجاء الانتظار" : "إضافه"}
+          </button>
+          <button className="cancelBtn" onClick={() => setAddOpen(false)}>
+            إالغاء
+          </button>
+        </div>
       </form>
     </div>
   );

@@ -21,13 +21,16 @@ export const DeleteFunder = ({ setDeleteOpen, deleteUserId }) => {
         X
       </span>
       <h1>{`حذف العنصر`}</h1>
-      <div className="">
-        <p className="item">هل متأكد من مسح العنصر التالي ؟</p>
-        <div className="deleteButtons">
-          <button className="deleteButton" onClick={handleSubmit}>
+      <div className="deleteFlexer">
+        <h2>هل متأكد من مسح العنصر التالي ؟</h2>
+        <div className="deleteAdminDeleteBtns">
+          <button className="deleteAdminDelete" onClick={handleSubmit}>
             حذف
           </button>
-          <button className="cancelButton" onClick={() => setDeleteOpen(false)}>
+          <button
+            className="deleteAdminCancel"
+            onClick={() => setDeleteOpen(false)}
+          >
             الغاء
           </button>
         </div>

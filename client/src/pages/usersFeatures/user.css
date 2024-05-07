@@ -1,67 +1,118 @@
-      .users{
-        height: 100vh;
-      }
-      .users .info{
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        margin-bottom: 20px;
-        
-      }
-      .info button{
-        padding: 5px;
-        cursor: pointer;
-      }
-.dataGrid{
-       background-color: white;
-       padding: 20px; 
-      }
-.MuiDataGrid-toolbarContainer{ 
-    flex-direction: row-reverse;
-    align-items: center;
+.users{
+    position: relative;
 }
-.dataTable img{
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    object-fit: cover;
+.main-marg {
+    margin: 100px 10px 0px 10px;
+    font-family: "Poppins", sans-serif !important;
 }
-#correct{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgb(24, 24, 24);
-}
-#wrong{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgb(67, 65, 65);
-    font-size: 14px;
-}
-.action{
+.headerBox {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 15px;
+    margin-bottom: 0px;
+    color: #FFB801;
+}
+.headerBox button {
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 500;
+    padding: 10px;
+    color: #ffffff;
+    border: 1px solid black;
+    background-color: #FFB801;
+    font-size: 19px;
+}
+.headerBox button:hover {
+    color: #FFB801;
+    background-color: inherit;
+    border: 1px solid #FFB801;
+}
+.headerBox .searchHeader{
+    padding: 10px 5px;
+    border: 1px solid #FFB801;
+    border-radius: 20px;
+    outline: none;
+}
+.setAdminDeleteBtn {
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    position: relative;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    background-color: transparent;
+    outline: 0px;
+    margin: 0px;
+    cursor: pointer;
+    user-select: none;
+    vertical-align: middle;
+    appearance: none;
+    text-decoration: none;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 1.75;
+    letter-spacing: 0.02857em;
+    text-transform: uppercase;
+    min-width: 50px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    border: 1px solid rgba(211, 47, 47, 0.5);
+    color: rgb(211, 47, 47);
+}
+.MuiDataGrid-toolbarContainer.css-1j9kmqg-MuiDataGrid-toolbarContainer>button {
+    padding: 13px !important;
+    color: white !important;
+}
+.actionWrapper {
+   cursor: pointer;
+}
+.actionWrapper .editBtn {
+    border-right: 1px solid gray;
+    padding: 5px;
+}
+.actionWrapper .deleteBtn {
+    padding: 5px;
+}
+#statusBtnOffline {
+    padding: 5px 20px;
+    background-color: rgba(255, 0, 0, 0.843);
+    color: white;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+#statusBtnActive {
+    padding: 5px 20px;
+    background-color: #37D500;
+    color: white;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+.tableAvatar {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
 }
 /* // add user componnet  */
 .add{
-    width: 100vw;
-    height: 100vh;
+    width: 105vw;
+    height: 100%;
     position: absolute;
-    top: 0;
-    left: 0;
+    top: -13%;
+    left: -6%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(0,0,0,0.724);
-}
-.modal{
-padding: 50px;
-border-radius: 10px;
-position: relative;
-background-color: #2a3447
+    background-color: rgba(0, 0, 0, 0.372);
+    z-index: 9999;
 }
 .close{
 position: absolute;
@@ -69,63 +120,244 @@ top: 10px;
 right: 10px;
 cursor: pointer;
 }
-
-.modal h1{
-    margin-bottom: 40px;
-    font-size: 24px;
-    color: #ddd;
+.main-marg {
+    margin: 100px 10px 0px 10px;
 }
-form{
+.addWrapper {
     display: flex;
-    flex-wrap: wrap;
-    max-width: 500px;
-    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    gap: 15px;
 }
-.item{
+.addWrapper .imgContainer {
+    cursor: pointer;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 300;
+    margin-left: -6%;
+}
+.addWrapper .imgContainer label {
+    height: 130px;
+    width: 130px;
+    border-radius: 50%;
+    background-color: #6E6C77;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid;
+}
+.addWrapper .imgContainer p {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    margin-bottom: 0px;
+}
+.addWrapper .imgContainer label .imageFile {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.addWrapper .imgUpload {
+    display: none;
+}
+.inputsContainer {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    margin-left: -6%;
+}
+.inputContainer {
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+    margin-top: 10px;
+}
+.inputContainer input,
+.inputContainer .dropdown button,
+.inputContainer .dropdown-menu {
+    width: 30.5vw;
+    padding: 15px 10px;
+    border-radius: 10px;
+    outline: none;
+    border: 1px solid #CDCDCD;
+    font-size: 13px;
+    color: #CDCDCD;
+    background-color: inherit;
+    font-weight: 300;
+}
+.inputContainer .dropdown .dropdownFlexBtn {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 60%;
+}
+.inputContainer .dropdown .dropdownFlexBtn p {
+    font-size: 13px;
+    font-weight: 300;
+    color: #6E6C77;
+    margin-bottom: 0px;
+}
+.inputContainer .dropdown-menu {
+    background-color: #00054F;
+    color: white;
+    padding: 8px;
+    cursor: pointer;
+    border: 1px solid #FFB801;
+    outline: none;
+}
+.inputContainer .dropdown-menu>li:hover {
+    background-color: rgba(78, 77, 77, 0.725);
+    color: #FFB801;
+}
+.addWrapper .inputButtons {
+    display: flex;
+    gap: 30px;
+}
+.inputContainer>label {
+    font-size: 19px;
+    color: #CDCDCD;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+.addWrapper .inputButtons .cancelBtn,
+.addWrapper .inputButtons .doneBtn {
+    padding: 10px 50px;
+    margin-top: 20px;
+    font-size: 21px;
+    font-weight: 300;
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+}
+.addWrapper .inputButtons .cancelBtn {
+    border: 1px solid #FF1700;
+    color: white;
+    background-color: inherit;
+}
+.addWrapper .inputButtons .cancelBtn:hover {
+    border: 1px solid white;
+    color: white;
+    background-color: #FF1700;
+}
+.addWrapper .inputButtons .doneBtn {
+    border: 1px solid #FFB801;
+    background-color: #FFB801;
+    color: white;
+}
+.addWrapper .inputButtons .doneBtn:hover {
+    border: 1px solid #FFB801;
+    background-color: inherit;
+    color: #FFB801;
+}
+/* delelte */
+.deleteModal{
+    border: 1px solid #FFB801;
+        padding: 25px !important;
+        border-radius: 20px;
+        position: absolute;
+            background-color: #243b65;
+            top: 20% !important;   
+}
+.deleteFlexer{
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-bottom: 20px;
 }
-.item >.label{
-    font-size: 14px;
+.deleteFlexer h2{
+    font-size: 25px;
+        margin: 20px 0px;
+        padding: 8px;
+        font-weight: 500;
 }
-.item >input{
-    padding: 10px;
-    background-color: transparent;
-    color: white;
-    outline: none;
-    border: 1px solid #ddd;
-    border-radius: 3px;
-}
-.addButton{
-    width: 100%;
-    padding: 10px;
-    cursor: pointer;
-}
-/* delelte */
-.deleteButtons{
+.deleteFlexer .deleteAdminDeleteBtns{
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+        flex-direction: row;
+        gap: 20px;
+        margin-bottom: 20px;
 }
-.deleteButtons >button{
-    padding: 10px;
-    width: 45%;
+.deleteAdminCancel{
+border: 1px solid #FFB801;
+    padding: 20px 40px;
+    color: #FFB801;
+    background-color: inherit;
     cursor: pointer;
-    font-size: 19px;
-    font-weight: 500;
+    font-size: 22px;
+    font-weight: bold;
+    border-radius: 10px;
+    width: 45%;
 }
-.deleteButton{
-    border: 1px solid rgb(200, 48, 48);
-    transition: 0,9s linear;
-    background-color: rgb(173, 61, 61);
+ .deleteAdminCancel:hover {
+    border: 1px solid #FFB801;
+        background-color: #FFB801;
+        color: white;
+}
+.deleteAdminDelete {
+    border: 1px solid #FF1700;
     color: white;
+    background-color: inherit;
+    padding: 20px 40px;
+    cursor: pointer;
+    font-size: 22px;
+    font-weight: bold;
+    border-radius: 10px;
+    width: 45%;
 }
-.deleteButton:hover{
-    border:1px solid white;
-    background-color: rgb(200, 48, 48);
+ .deleteAdminDelete:hover {
+    border: 1px solid white;
+    color: white;
+    background-color: #FF1700;
 }
-.cancelButton:hover{
-    background-color: rgb(221, 122, 122);
+/* store components */
+.storeColumnButton{
+    border: 1px solid #FFB801;
+        padding: 7px 10px;
+        color: #FFB801;
+        background-color: inherit;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: 500;
+        border-radius: 8px;    
+        width: 98%;    
+}
+.storeColumnButton:hover{
+    border: 1px solid #FFB801;
+        background-color: #FFB801;
+        color: white;
+}
+.showImgImg{
+    max-width: 450px;
+    max-height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* Responsive Design  */
+@media only screen and (max-width: 480px){ 
+    .main-marg {
+        margin: 80px 10px 0px 10px;
+}
+/* delete user  */
+.deleteModal {
+    border: 1px solid #FFB801;
+    padding: 25px !important;
+    border-radius: 20px;
+    position: absolute;
+    background-color: #2a3447;
+    top: 15% !important;
+    width: 98vw;
+}
+ /* add process page  */
+ .main-marg {
+     margin: 80px 10px 0px 10px;
+ }
+ .inputContainer input {
+     width: 80vw;
+ }
+ .addWrapper .inputButtons {
+     display: flex;
+     gap: 15px;
+ }
 }

@@ -2,33 +2,43 @@ import React, { useState } from "react";
 import "../modal.css";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { Box } from "@mui/material";
+import Header from "../../components/Header";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { useNavigate } from "react-router-dom";
 
-export const AddAnalyics = ({ setOpenAddAnalyics }) => {
+export const AddAnalyics = () => {
   const [title, setTitle] = useState("");
   const [type, setType] = useState("");
+  const navigate = useNavigate();
 
   const addNewAnalyics = async (e) => {
     try {
-      e.preventDefault();
-      const res = await axios.post("https://api.albahren.com/api/analyics", {
-        title,
-        type,
-      });
-      res.status === 200 && toast.success("تم اضافه العمليه بنجاح");
-      res.status === 500 && toast.error("حدث خطأ ما");
+      if (title === "") {
+        toast.error("برجاء اضافه اسم عمليه ");
+      } else if (type === "") {
+        toast.error("برجاء اضافه نوع العمليه ");
+      } else {
+        e.preventDefault();
+        const res = await axios.post("https://api.albahren.com/api/analyics", {
+          title,
+          type,
+        });
+        res.status === 200 && toast.success("تم اضافه العمليه بنجاح");
+        navigate("/analyics");
+        res.status === 500 && toast.error("حدث خطأ ما");
+      }
     } catch (err) {
       console.log(err);
     }
-    setOpenAddAnalyics(false);
   };
   return (
-    <div className="myModall">
-      <span className="close" onClick={() => setOpenAddAnalyics(false)}>
-        X
-      </span>
-      <h1 className="ms-2">{"أضافه عمليه جديده"}</h1>
-      <form onSubmit={(e) => e.preventDefault}>
-        <div className="formItem">
+    <Box className="main-marg">
+      <Box className="headerBox">
+        <Header title={"إضافه تقرير"} subtitle="" />
+      </Box>
+      <div className="addWrapper">
+        <div className="inputContainer">
           <label htmlFor="title">العمليه</label>
           <input
             name="title"
@@ -38,34 +48,38 @@ export const AddAnalyics = ({ setOpenAddAnalyics }) => {
             required
           />
         </div>
-        <div className="formItem">
-          <div class="nav-item dropdown">
-            <label
-              class="nav-link dropdown-toggle"
-              role="button"
+        <div className="inputContainer">
+          <label>نوع العمليه</label>
+          <div className="dropdown">
+            <button
+              className="dropdownFlexBtn"
+              type="button"
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              {type === ""
-                ? " نوع العمليه"
-                : type === "sarf"
-                ? "شبكات صرف صحي"
-                : "شبكات مياه"}
-            </label>
-            <div class="dropdown-menu cursor-pointer">
-              <p class="dropdown-item" onClick={(e) => setType("sarf")}>
-                شبكات صرف صحي
-              </p>
-              <p class="dropdown-item" onClick={(e) => setType("water")}>
-                شبكات مياه
-              </p>
-            </div>
+              {type === "" ? (
+                <>
+                  <p>نوع العمليه</p>
+                  <KeyboardArrowDownIcon className="icon" />
+                </>
+              ) : type === "sarf" ? (
+                "شبكات صرف صحي"
+              ) : (
+                "شبكات مياه"
+              )}
+            </button>
+            <ul class="dropdown-menu">
+              <li onClick={(e) => setType("sarf")}>شبكات صرف صحي</li>
+              <li onClick={(e) => setType("water")}>شبكات مياه</li>
+            </ul>
           </div>
         </div>
-        <button className="addButton" onClick={addNewAnalyics}>
-          أضافه
-        </button>
-      </form>
-    </div>
+        <div className="inputButtons">
+          <button className="doneBtn" onClick={addNewAnalyics}>
+            أضافه
+          </button>
+        </div>
+      </div>
+    </Box>
   );
 };

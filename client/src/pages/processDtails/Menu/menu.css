@@ -1,0 +1,84 @@
+.processMenu{
+    /* width: 13vw; */
+}
+.processMenu .processmenuBarWrapper {  
+    padding: 10px;
+        border-radius: 20px;
+        background-color: #eaeaea22;
+        -webkit-backdrop-filter: blur(15px);
+        backdrop-filter: blur(15px);
+        height: 13vh;
+        overflow-x: auto;
+        position: absolute;
+        top: 84px;
+        width: 79vw;
+        overflow-y: hidden;
+    }
+    .processMenu .processmenuBarWrapper .menuItems{
+        display: flex;
+        gap: 20px;
+    }
+    .processMenu .processmenuBarWrapper .menuItems .menuItemHeader{
+        font-size: 11px;
+            width:max-content;
+            padding: 5px 15px;
+        font-weight: bold;
+        border-radius: 8px;
+        color: #CDCDCD;
+            border: 1px solid #CDCDCD;
+    }
+    .processMenu .processmenuBarWrapper .menuItemHeader:hover{       
+        color: #FFB801;
+            border: 1px solid #FFB801;
+    }
+.processMenu .processmenuItemHeader {
+        margin-right: 10%;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 800;
+        line-height: 150%;
+        color: #FFB801;
+    }
+    .processMenu .menuItemWrapper{
+        position: relative;
+    }
+    .processMenu .menuItemWrapper .processmenuItemHeader{
+        font-size: 22px;
+            font-weight: bold;
+            cursor: pointer;
+            width: max-content;
+            border: 1px solid #FFB801;
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin-top: 5px;
+    }
+    .processMenu .menuItemWrapper .processmenuItemHeader:hover{        
+            color: #FFB801;
+            border:1px solid #CDCDCD;           
+    }
+        @media only screen and (max-width:500px) {
+            .processMenu {
+                    width: 0vw;
+                }
+            .processMenu .processmenuBarWrapper {
+                        padding: 10px;
+                            border-radius: 20px;
+                            background-color: #eaeaea22;
+                            -webkit-backdrop-filter: blur(15px);
+                            backdrop-filter: blur(15px);
+                            height: 13vh;
+                            overflow-x: auto;
+                            position: absolute;
+                            top: 65px;
+                            width: 99vw;
+                            overflow-y: hidden;
+                }
+                .processMenu .processmenuBarWrapper .menuItems{
+                    display: flex;
+                }
+                .processMenu .processmenuBarWrapper .menuItems .menuItem{
+                display: flex;
+                    flex-direction: row;
+                    gap: 10px;
+                }
+        }

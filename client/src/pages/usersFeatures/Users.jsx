@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "./user.css";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { Box, useTheme } from "@mui/material";
+import { tokens } from "../../theme";
+import Header from "../../components/Header";
+import { DataGrid } from "@mui/x-data-grid";
 import { DeleteUser } from "./DeleteUser";
 import axios from "axios";
 
+
 export const Users = () => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [deleteUserId, setDeleteUserId] = useState("");
   const [rowData, setRowData] = useState([]);
@@ -13,58 +19,53 @@ export const Users = () => {
     {
       field: "avatar",
       headerName: "Avatar",
-      width: 90,
       renderCell: (params) => {
-        return <img src={params.row.img || "./noImg.png"} alt="" />;
+        return <img src={params.row.img || "./images/noImg.png"} alt="" className="tableAvatar"/>;
       },
     },
     {
       field: "username",
       headerName: "اسم المستخدم",
-      type: "number",
-      width: 100,
-      editable: true,
+      flex:1,
     },
     {
       field: "firstName",
       headerName: "الاسم الاول",
-      width: 150,
+      flex:1,
     },
     {
       field: "lastName",
       headerName: "الاسم الاخير",
-      width: 150,
+      flex:1,
     },
-
     {
       field: "createdAt",
       headerName: "التاريح",
-      width: 160,
+      flex:1,
     },
     {
       field: "status",
       headerName: "أدمن",
-      width: 70,
+      flex:1,
       type: Boolean,
       renderCell: (params) => {
         return params.row.status === 1 ? (
-          <i class="fa-solid fa-check" id="correct"></i>
+          <i class="fa-solid fa-check" id="statusBtnActive"></i>
         ) : (
-          <i id="wrong" class="fa-solid fa-xmark"></i>
+          <i class="fa-solid fa-xmark" id="statusBtnOffline"></i>
         );
       },
     },
     {
       field: "Action",
       headerName: "حذف",
-      width: 200,
       renderCell: (params) => {
         const deleteHandler = () => {
           setDeleteUserId(params.row.id);
           setDeleteOpen(true);
         };
         return (
-          <div className="action">
+          <div className="actionWrapper">
             <i
               class="fa-solid fa-trash"
               style={{ color: "red", fontSize: "20px" }}
@@ -75,7 +76,6 @@ export const Users = () => {
       },
     },
   ];
-
   const rows = rowData.map((item) => {
     return {
       id: item._id,
@@ -99,37 +99,47 @@ export const Users = () => {
     fetchData();
   }, [rowData.id]);
   return (
-    <div className="users">
-      <div className="info">
-        <h1>المستخدمين</h1>
-      </div>
-      <div className="dataTable">
+    <div className='users'>    
+     <div className='main-marg' >
+      <Box className='headerBox'>
+        <Header title={"المستخدمين"} />        
+      </Box>
+     <Box
+        m="10px 0 0 0"
+        height="75vh"
+        border="1px solid #6E6C77"
+        borderRadius={2}
+        sx={{
+          "& .MuiDataGrid-root.MuiDataGrid-root--densityStandard.css-1kt8ah5-MuiDataGrid-root": {
+            border: "none",
+            },
+          "& .MuiDataGrid-cell": {
+            borderBottom: "none",
+          },
+          "& .name-column--cell": {
+            color: colors.greenAccent[500],
+          },
+          "& .MuiDataGrid-columnHeaders": {
+            backgroundColor: colors.primary[500],
+            borderBottom: "1px solid #6E6C77",
+          },
+          "& .MuiDataGrid-virtualScroller": {
+            backgroundColor: colors.primary[400],
+          },
+          "& .MuiDataGrid-footerContainer": {
+            borderTop: "none",
+            backgroundColor: colors.primary[500],
+          },
+          "& .MuiCheckbox-root": {
+            color: `${colors.greenAccent[200]} !important`,
+          },
+        }}
+      >
         <DataGrid
-          className="dataGrid"
           rows={rows}
-          columns={columns}
-          initialState={{
-            pagination: {
-              paginationModel: {
-                pageSize: 100,
-              },
-            },
-          }}
-          slots={{ toolbar: GridToolbar }}
-          slotProps={{
-            toolbar: {
-              showQuickFilter: true,
-              quickFilterProps: { debounceMs: 500 },
-            },
-          }}
-          pageSizeOptions={[5]}
-          checkboxSelection
-          disableRowSelectionOnClick
-          disableColumnFilter
-          disableColumnSelector
-          disableDensitySelector
+          columns={columns}        
         />
-      </div>
+        </Box>
       {deleteOpen && (
         <DeleteUser
           setDeleteOpen={setDeleteOpen}
@@ -137,7 +147,8 @@ export const Users = () => {
           colums={"colums"}
           deleteUserId={deleteUserId}
         />
-      )}
-    </div>
+        )}
+      </div>
+      </div>
   );
 };

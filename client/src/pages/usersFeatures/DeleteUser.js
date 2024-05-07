@@ -16,19 +16,19 @@ export const DeleteUser = (props) => {
   };
   return (
     <div className="add">
-      <div className="modall">
+      <div className="deleteModal">
         <span className="close" onClick={() => props.setDeleteOpen(false)}>
           X
         </span>
         <h1>{`حذف المستخدم`}</h1>
-        <div className="">
-          <p className="item">هل متأكد من مسح المستخدم التالي ؟</p>
-          <div className="deleteButtons">
-            <button className="deleteButton" onClick={handleSubmit}>
+        <div className="deleteFlexer">
+          <h2>هل متأكد من مسح المستخدم التالي ؟</h2>
+          <div className="deleteAdminDeleteBtns">
+            <button className="deleteAdminDelete" onClick={handleSubmit}>
               حذف
             </button>
             <button
-              className="cancelButton"
+              className="deleteAdminCancel"
               onClick={() => props.setDeleteOpen(false)}
             >
               الغاء

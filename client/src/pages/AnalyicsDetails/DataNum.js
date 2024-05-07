@@ -38,7 +38,7 @@ export const DataNum = ({ dataNum, name }) => {
   return (
     <div className="dataNum">
       {dataOne.length === 0 ? (
-        <div className="plan" onClick={() => setAddOpen(!addOpen)}>
+        <div onClick={() => setAddOpen(!addOpen)}>
           <div className="addPlan">+</div>
         </div>
       ) : (

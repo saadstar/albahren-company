@@ -81,7 +81,6 @@ position: absolute;
     padding: 10px;
     cursor: pointer;
     font-weight: bold;
-    background-color: #5778c6;
     color: white;
 }
 
@@ -105,10 +104,7 @@ position: absolute;
     padding: 50px;
     border-radius: 10px;
     background-color: #2a3447;
-    padding: 50px;
-    border-radius: 10px;
     position: absolute;
-    background-color: #2a3447;
     top: 12px;
     right: 40%;
 }

@@ -1,0 +1,21 @@
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 20px;
+    grid-auto-rows: 140px;
+    margin-top: 20px;
+}
+
+/* // resposive Design */
+@media only screen and (max-width:1040px) {
+    .dashboard {
+        display: flex;
+        gap: 20px;
+        flex-direction: column;
+        margin-top: 20px;
+    }
+
+    .renvue {
+        max-width: 99%;
+    }
+}

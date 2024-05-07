@@ -1,16 +1,16 @@
-import React, { useContext, useEffect, useState } from "react";
-import "./processDetails.css";
+import React, { useEffect, useState } from "react";
 import { Menu } from "./Menu/Menu";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { AuthContext } from "../../auth/authContext/authContext";
-import { toast } from "react-toastify";
+import { Box, useTheme } from "@mui/material";
+import { tokens } from "../../theme";
+import Header from "../../components/Header";
+import { DataGrid } from "@mui/x-data-grid";
 
 export const ProcessDetails = () => {
-  const { user } = useContext(AuthContext);
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   const [processBand, setProcessBand] = useState([]);
-  const [processData, setProcessData] = useState([]);
-  const [processIncome, setProcessIncome] = useState(0);
   const [processTitle, setProcessTitle] = useState({});
   const { id } = useParams();
   const tubesValue = [];
@@ -192,16 +192,16 @@ export const ProcessDetails = () => {
   useEffect(() => {
     sumWoodValue();
   });
-  const sumRoomsValue = () => {
-    let sum = 0;
-    for (let i = 0; i < roomsValue.length; i++) {
-      sum += roomsValue[i];
-    }
-    setRoomsTotal(sum);
-  };
-  useEffect(() => {
-    sumRoomsValue();
-  });
+    const sumRoomsValue = () => {
+      let sum = 0;
+      for (let i = 0; i < roomsValue.length; i++) {
+        sum += roomsValue[i];
+      }
+      setRoomsTotal(sum);
+    };
+   useEffect(() => {
+     sumRoomsValue();
+   });
    const sumSalleryValue = () => {
      let sum = 0;
      for (let i = 0; i < salleryValue.length; i++) {
@@ -233,193 +233,145 @@ export const ProcessDetails = () => {
   useEffect(() => {
     fetchProcessValue();
     fetchProcessTitle();
-  });
-  const fetchProcess = async (e) => {
-    try {
-      const res = await axios.get(`https://api.albahren.com/api/process/${id}`);
-      setProcessData(res.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  const addIncomeProcess = async (e) => {
-    try {
-      e.preventDefault();
-      const res = await axios.put(
-        `https://api.albahren.com/api/process/${id}`,
-        {
-          processIncome,
-        }
-      );
-      res.status === 200 && toast.success("تم اضافه الوارد بنجاح");
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  useEffect(() => {
-    fetchProcess();
-    addIncomeProcess();
+  });  
+  const tabletData = [
+    {
+      id: "1",
+      band: "المواسير",
+      price: Math.round(tubesTotal),
+    },
+    {
+      id: "2",
+      band: "الرمل",
+      price: Math.round(sandTotal),
+    },
+    {
+      id: "3",
+      band: "السن",
+      price: Math.round(senTotal),
+    },
+    {
+      id: "4",
+      band: "الاسمنت",
+      price: Math.round(cementTotal),
+    },
+    {
+      id: "5",
+      band: "النثريات",
+      price: Math.round(detailsTotal),
+    },
+    {
+      id: "6",
+      band: "المصناعيه",
+      price: Math.round(workerTotal),
+    },
+    {
+      id: "7",
+      band: "الخامات",
+      price: Math.round(materialsTotal),
+    },
+    {
+      id: "8",
+      band: "العوازل",
+      price: Math.round(azlTotal),
+    },
+    {
+      id: "9",
+      band: "الانتقالات",
+      price: Math.round(transportTotal),
+    },
+    {
+      id: "10",
+      band: "الأعطال",
+      price: Math.round(repairTotal),
+    },
+    {
+      id: "11",
+      band: "الأخشاب",
+      price: Math.round(woodTotal),
+    },
+    {
+      id: "12",
+      band: "الغرف",
+      price: Math.round(roomsTotal),
+    },
+    {
+      id: "13",
+      band: "المرتبات",
+      price: Math.round(salleryTotal),
+    },
+  ];
+  const columns = [
+    {
+      field: "band",
+      headerName: "البند",
+      flex: 1,
+    },
+    {
+      field: "price",
+      headerName: "المصاريف",
+      flex: 1,
+    },
+  ];
+  const rows = tabletData.map((item) => {
+    return {
+      id: item.id,
+      band: item.band,
+      price: item.price,
+    };
   });
   return (
-    <div className="processDetails">
-      <div className="container loober">
-        <div className="menuContainer">
-          <Menu />
-        </div>
-        <div className="contentContainer">
-          <div className="header" key={processTitle._id}>
-            <h2 className="headerTitle">اسم العمليه/ {processTitle.title}</h2>
-            <h6 className="headerIndex">البيان العام للمصروفات</h6>
-          </div>
-          <div className="headerTablet">
-            <table>
-              <tr className="tabletHeader">
-                <th className="band">البند</th>
-                <th className="band">السعر</th>
-              </tr>
-              <tr>
-                <td>مواسير</td>
-                <td>{Math.round(tubesTotal)}</td>
-              </tr>
-              <tr>
-                <td>رمل</td>
-                <td>{Math.round(sandTotal)}</td>
-              </tr>
-              <tr>
-                <td>سن</td>
-                <td>{Math.round(senTotal)}</td>
-              </tr>
-              <tr>
-                <td>اسمنت</td>
-                <td>{Math.round(cementTotal)}</td>
-              </tr>
-              <tr>
-                <td>نثريات</td>
-                <td>{Math.round(detailsTotal)}</td>
-              </tr>
-              <tr>
-                <td>مصناعيه</td>
-                <td>{Math.round(workerTotal)}</td>
-              </tr>
-              <tr>
-                <td>خامات</td>
-                <td>{Math.round(materialsTotal)}</td>
-              </tr>
-              <tr>
-                <td>عزل</td>
-                <td>{Math.round(azlTotal)}</td>
-              </tr>
-              <tr>
-                <td>غرف</td>
-                <td>{Math.round(roomsTotal)}</td>
-              </tr>
-              <tr>
-                <td>انتقالات مواقع</td>
-                <td>{Math.round(transportTotal)}</td>
-              </tr>
-              <tr>
-                <td>اعطال</td>
-                <td>{Math.round(repairTotal)}</td>
-              </tr>
-              <tr>
-                <td>خشب</td>
-                <td>{Math.round(woodTotal)}</td>
-              </tr>
-              <tr>
-                <td>المرتبات</td>
-                <td>{Math.round(salleryTotal)}</td>
-              </tr>
-              <tr className="tabletHeader">
-                <th className="band">اجمالي العمليه</th>
-                <th className="band">{Math.round(overTotal)}</th>
-              </tr>
-            </table>
-          </div>
-          {user.isAdmin === 1 && (
-            <div className="processReport p-3">
-              <div className="processReport-flex">
-                <h1>مكسب العمليه</h1>
-                {/* <!-- Button trigger modal --> */}
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                >
-                  أضافه المبلغ الوارد
-                </button>
-                {/* <!-- Modal --> */}
-                <div
-                  class="modal fade"
-                  id="exampleModal"
-                  tabindex="-1"
-                  aria-labelledby="exampleModalLabel"
-                  aria-hidden="true"
-                >
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button
-                          type="button"
-                          class="btn-close"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                        ></button>
-                      </div>
-                      <div class="modal-body">
-                        <label
-                          class="color-black"
-                          style={{ color: "black" }}
-                          htmlFor="IncomeProcess"
-                        >
-                          المبلغ الوارد
-                        </label>
-                        <input
-                          placeholder="ادخل المبلغ الوارد"
-                          type="number"
-                          id="IncomeProcess"
-                          onChange={(e) => setProcessIncome(e.target.value)}
-                        />
-                      </div>
-                      <div class="modal-footer">
-                        <button
-                          type="button"
-                          class="btn btn-primary"
-                          onClick={addIncomeProcess}
-                        >
-                          أضافه
-                        </button>
-                        <button
-                          type="button"
-                          class="btn btn-secondary"
-                          data-bs-dismiss="modal"
-                        >
-                          أغلاق
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {processData.processIncome && (
-                <>
-                  <div className="processReport-flex">
-                    <h2>الوارد</h2>
-                    <span className="processReport-red">
-                      {Math.round(processData.processIncome)}
-                    </span>
-                  </div>
-                  <div className="processReport-flex">
-                    <h2>المكسب</h2>
-                    <span className="processReport-green">
-                      {Math.round(processData.processIncome) -
-                        Math.round(overTotal)}
-                    </span>
-                  </div>
-                </>
-              )}
-            </div>
-          )}
+    <div className="app">
+      <Menu />
+      <div className="content">
+        <div style={{ margin: "200px 10px 0px 10px" }}>
+          <Box className="headerBox">
+            <Header
+              title={"البيان العام للمصروفات"}
+              subtitle={processTitle.title}
+            />
+          </Box>
+          <Box
+            m="10px 0 0 0"
+            height="60vh"
+            border="1px solid #6E6C77"
+            borderRadius={2}
+            width="65vw"
+            sx={{
+              "& .MuiDataGrid-root.MuiDataGrid-root--densityStandard.css-1kt8ah5-MuiDataGrid-root":
+                {
+                  border: "none",
+                },
+              "& .MuiDataGrid-cell": {
+                borderBottom: "none",
+              },
+              "& .name-column--cell": {
+                color: colors.greenAccent[500],
+              },
+              "& .MuiDataGrid-columnHeaders": {
+                backgroundColor: colors.primary[500],
+                borderBottom: "1px solid #6E6C77",
+              },
+              "& .MuiDataGrid-virtualScroller": {
+                backgroundColor: colors.primary[400],
+              },
+              "& .MuiDataGrid-footerContainer": {
+                borderTop: "none",
+                backgroundColor: colors.primary[500],
+              },
+              "& .MuiCheckbox-root": {
+                color: `${colors.greenAccent[200]} !important`,
+              },
+            }}
+          >
+            <DataGrid rows={rows} columns={columns} />
+          </Box>
+          <Box className="headerBox">
+            <Header
+              subtitle={"إجمالي مصروفات العمليه"}
+              title={Math.round(overTotal)}
+            />
+          </Box>
         </div>
       </div>
     </div>

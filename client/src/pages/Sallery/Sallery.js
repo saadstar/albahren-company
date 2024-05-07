@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
-import "../car/car.css";
 import axios from "axios";
 import { AddSallery } from "./AddSallery";
+import "../usersFeatures/user.css";
+import { Box, useTheme } from "@mui/material";
+import { tokens } from "../../theme";
+import { DataGrid } from "@mui/x-data-grid";
+import Header from "../../components/Header";
 
 export const Sallery = () => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   const [salleryData, setSalleryData] = useState([]);
-  const [openModal, setOpenModal] = useState(false);
-  const [search, setSearch] = useState("");
-  const filteredSallery = salleryData.filter((item) => {
-    return search === "" ? item : item.name === search;
-  });
-
+  const [addOpen, setAddOpen] = useState(false);
   useEffect(() => {
     const fetchSallery = async () => {
       try {
@@ -23,57 +24,108 @@ export const Sallery = () => {
     fetchSallery();
   }, [salleryData._id]);
 
+  const columns = [
+    {
+      field: "name",
+      headerName: "الاسم ",
+      flex: 1,
+    },
+    {
+      field: "role",
+      headerName: "الوظيفه",
+      flex: 1,
+    },
+    {
+      field: "salleryNum",
+      headerName: "المرتب",
+      flex: 1,
+    },
+    {
+      field: "added",
+      headerName: "الحوافز",
+      flex: 1,
+    },
+    {
+      field: "site",
+      headerName: "الموقع",
+      flex: 1,
+    },
+    {
+      field: "note",
+      headerName: "ملاحظات",
+      flex: 1,
+    },
+    {
+      field: "createdAt",
+      headerName: "التاريخ",
+      flex: 1,
+    },
+  ];
+  const rows = salleryData.reverse().map((item) => {
+    return {
+      id: item._id,
+      name: item.name,
+      role: item.role,
+      salleryNum: item.salleryNum,
+      added: item.added,
+      site: item.site,
+      note: item.note,
+      createdAt: item.createdAt.split("T")[0],
+    };
+  });
   return (
-    <div className="car">
-      <div className="carHeader">
-        <h1>المرتبات</h1>
-        <button onClick={() => setOpenModal(true)}>اضف مرتب جديد</button>
+    <div className="users">
+      <div className="main-marg">
+        <Box className="headerBox">
+          <Header
+            title={addOpen === true ? `صرف مرتب` : "المرتبات"}
+            subtitle={`استكشف كل  مرتبات الموظفين هنا`}
+          />
+          <button onClick={() => setAddOpen(!addOpen)}>
+            {addOpen === true ? "رجوع" : `صرف مرتب`}
+          </button>
+        </Box>
+        {addOpen === false ? (
+          <Box
+            m="10px 0 0 0"
+            height="70vh"
+            border="1px solid #6E6C77"
+            borderRadius={2}
+            sx={{
+              "& .MuiDataGrid-root.MuiDataGrid-root--densityStandard.css-1kt8ah5-MuiDataGrid-root":
+                {
+                  border: "none",
+                },
+              "& .MuiDataGrid-cell": {
+                borderBottom: "none",
+              },
+              "& .name-column--cell": {
+                color: colors.greenAccent[500],
+              },
+              "& .MuiDataGrid-columnHeaders": {
+                backgroundColor: colors.primary[500],
+                borderBottom: "1px solid #6E6C77",
+              },
+              "& .MuiDataGrid-virtualScroller": {
+                backgroundColor: colors.primary[400],
+              },
+              "& .MuiDataGrid-footerContainer": {
+                borderTop: "none",
+                backgroundColor: colors.primary[500],
+              },
+              "& .MuiCheckbox-root": {
+                color: `${colors.greenAccent[200]} !important`,
+              },
+            }}
+          >
+            <DataGrid rows={rows} columns={columns} />
+          </Box>
+        ) : (
+          <>
+            <AddSallery setAddOpen={setAddOpen} />
+          </>
+        )}
       </div>
-      <div class="d-flex p-4" role="search" width="50%">
-        <input
-          class="form-control me-2"
-          type="search"
-          placeholder="أبحث بإسم الموظف..."
-          onChange={(e) => setSearch(e.target.value)}
-          aria-label="Search"
-        />
-        <button class="btn btn-success" type="submit">
-          بحث
-        </button>
-      </div>
-      {filteredSallery.length === 0 ? (
-        <div>لا يوجد مرتبات</div>
-      ) : (
-        <table class="table table-hover mt-3">
-          <thead>
-            <tr>
-              <th scope="col d-flex" className="col d-flex">
-                الاسم
-              </th>
-              <th scope="col d-flex">الوظيفه</th>
-              <th scope="col d-flex">المرتب</th>
-              <th scope="col d-flex">التاريخ</th>
-              <th scope="col d-flex">الحوافز</th>
-              <th scope="col d-flex">الموقع</th>
-              <th scope="col d-flex">ملاحظات</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredSallery.reverse().map((item) => (
-              <tr>
-                <td className="zz">{item.name}</td>
-                <td className="zz">{item.role}</td>
-                <td className="zz">{item.salleryNum}</td>
-                <td className="zz">{item.createdAt.split("T")[0]}</td>
-                <td className="zz">{item.added}</td>
-                <td className="zz">{item.site}</td>
-                <td className="zz">{item.note}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
-      {openModal && <AddSallery setOpenModal={setOpenModal} />}
     </div>
   );
 };

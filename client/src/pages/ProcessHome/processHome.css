@@ -1,116 +1,178 @@
+.processHomeContainer{
+    margin: 120px 70px;
+}
 .processHome{
-    min-height: calc(100vh - 95px);
     display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        position: relative;
-
+        grid-template-columns: repeat(4, 1fr);       
+        gap: 20px;
 }
 .card{
     display: flex;
     flex-direction: column;
     cursor: pointer;
-    padding: 5px;
-    border: 1px solid lightgray;
-    margin: 10px;
-    border-radius: 10px;
 }
 .card img{
-    width: 100%;
-    height: 300px;
-    border-radius: 0px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
 }
 .card h2{
     padding-top: 5px;
-    width: 100%;
     text-align: center;
-    font-weight: 400;
-    font-size: 16px;
-}
-.cardAdd{
-    background-color: rgb(140, 140, 215);
-        cursor: pointer;
-        padding: 5px;
-        border: 1px solid lightgray;
-        margin: 10px;
-        height: 300px;
-    }
-.cardAdd:hover{
-    background-color: rgb(85, 85, 223);       
-    }
-.cardAdd .addProcess{
-    transform: translate(-40%,110%);
     font-weight: bold;
-    font-size: 70px;
-    color: rgba(0, 0, 255, 0.428);
+    font-size: 20px;
+    color: #FFB801;
 }
-.modal-footer{
+/* add admin page design  */
+.main-marg{
+   margin: 100px 10px 0px 10px;
+}
+.addWrapper {
     display: flex;
-        align-items: center;
-        /* gap: 23px; */
-        justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    gap: 15px;
 }
- .modalClose{
-    padding: 10px 20px;
-        background-color: red;
-        color: white;
-        border: 1px solid red;
-        border-radius: 13px;
-        font-size: 15px;
-        cursor: pointer;
+.addWrapper .imgContainer {
+    cursor: pointer;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 300;
+    margin-left: -6%;
 }
- .modalClose:hover{
-    padding: 10px 20px;
-        border:1px solid red;
-        color: red;
-        background-color: white;
-        border-radius: 13px;
-        font-size: 15px;
+.addWrapper .imgContainer label {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    background-color: #6E6C77;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid;
 }
- .submit{
-    padding: 10px 20px;
-        background-color: green;
-        color: white;
-        border: 1px solid green;
-        border-radius: 13px;
-        font-size: 15px;
-        cursor: pointer;
+.addWrapper .imgContainer p {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    margin-bottom: 0px;
+    font-size: 18px;
+    font-weight: bold;
 }
-.submit:hover{
-    padding: 10px 20px;
-        border:1px solid green;
-        color: green;
-        background-color: white;
-        border-radius: 13px;
-        font-size: 15px;
+.addWrapper .imgContainer label .imageFile {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
 }
-
-
+.addWrapper .imgUpload {
+    display: none;
+}
+.inputsContainer {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    margin-left: -6%;
+}
+.inputContainer {
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.inputContainer input,
+.inputContainer .dropdown button,
+.inputContainer .dropdown-menu {
+    width: 30.5vw;
+    padding: 15px 10px;
+    border-radius: 10px;
+    outline: none;
+    border: 1px solid #CDCDCD;
+    font-size: 13px;
+    color: #CDCDCD;
+    background-color: inherit;
+    font-weight: 300;
+}
+.inputContainer .dropdown .dropdownFlexBtn {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 60%;
+}
+.inputContainer .dropdown .dropdownFlexBtn p {
+    font-size: 13px;
+    font-weight: 300;
+    color: #6E6C77;
+    margin-bottom: 0px;
+}
+.inputContainer .dropdown-menu {
+    background-color: #00054F;
+    color: white;
+    padding: 8px;
+    cursor: pointer;
+    border: 1px solid #FFB801;
+    outline: none;
+}
+.inputContainer .dropdown-menu>li:hover {
+    background-color: rgba(78, 77, 77, 0.725);
+    color: #FFB801;
+}
+.addWrapper .inputButtons {
+    display: flex;
+    gap: 30px;
+}
+.inputContainer>label {
+    font-size: 14px;
+    color: #CDCDCD;
+    font-weight: 500;
+}
+.addWrapper .inputButtons .cancelBtn,
+.addWrapper .inputButtons .doneBtn {
+    padding: 10px 50px;
+    margin-top: 20px;
+    font-size: 21px;
+    font-weight: 300;
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+}
+.addWrapper .inputButtons .cancelBtn {
+    border: 1px solid #FF1700;
+    color: white;
+    background-color: inherit;
+}
+.addWrapper .inputButtons .cancelBtn:hover {
+    border: 1px solid white;
+    color: white;
+    background-color: #FF1700;
+}
+.addWrapper .inputButtons .doneBtn {
+    border: 1px solid #FFB801;
+    background-color: #FFB801;
+    color: white;
+}
+.addWrapper .inputButtons .doneBtn:hover {
+    border: 1px solid #FFB801;
+    background-color: inherit;
+    color: #FFB801;
+}
 /* responsive design  */
 @media only screen and (max-width:1400px) {
     .processHome {
-        min-height: calc(100vh - 95px);
         display: grid;
         grid-template-columns: repeat(3, 1fr);
     }
-
     .card img {
         width: 100%;
         height: 300px;
         border-radius: 0px;
         display: block;
     }
-
-    .cardAdd .addProcess {
-        font-weight: normal;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transform: none;
-    }
 }
 @media only screen and (max-width:480px) {
     .processHome {
-            min-height: calc(100vh - 95px);
             display: grid;
             grid-template-columns: repeat(1, 1fr);
         }
@@ -119,24 +181,17 @@
             height: 300px;
             border-radius: 0px;
             display: block  ;
-    }
-    .cardAdd .addProcess {
-            font-weight: normal;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transform: none;
-        }
-                .processModal {
-                    position: absolute;
-                    top: 0;
-                    left: 10%;
-                    background-color: white !important;
-                    border-radius: 5px;
-                    padding: 16px;
-                    color: black;
-                    font-size: 20px;
-                    width: 80%;
-                }
+    }    
+         /* add process page  */         
+         .main-marg{
+            margin: 80px 10px 0px 10px;
+         }    
+         .inputContainer input{
+             width: 80vw;
+         }
+         .addWrapper .inputButtons {
+             display: flex;
+             gap: 15px;
+         }
 }
 

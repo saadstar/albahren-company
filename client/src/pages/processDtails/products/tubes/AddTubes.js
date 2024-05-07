@@ -41,19 +41,10 @@ export const AddTubes = ({ id, setAddOpen, type }) => {
     }
   };
   return (
-    <div className="modalll">
-      <span className="close" onClick={() => setAddOpen(false)}>
-        X
-      </span>
-      <h1>{`أضافه عنصر جديد`}</h1>
+    <div className="addWrapper">
       <form onSubmit={(e) => e.preventDefault}>
-        <div className="formItem">
+        <div className="inputContainer">
           <label htmlFor="notes">اسم البيان: </label>
-          {note === "" && (
-            <span style={{ color: "red", fontSize: "10px", fontWeight: "300" }}>
-              برجاء ادخل البيان
-            </span>
-          )}
           <input
             name="notes"
             placeholder={"مثل: مواسير 9 بوصه"}
@@ -61,8 +52,8 @@ export const AddTubes = ({ id, setAddOpen, type }) => {
             onChange={(e) => setNote(e.target.value)}
           />
         </div>
-        <div className="formItem">
-          <label htmlFor="quantity">الكميه :</label>
+        <div className="inputContainer">
+          <label htmlFor="quantity">الكميه:</label>
           <input
             name="quantity"
             placeholder="ادخل الكميه بالمتر"
@@ -71,7 +62,7 @@ export const AddTubes = ({ id, setAddOpen, type }) => {
           />
         </div>
         {type === "worker" && (
-          <div className="formItem">
+          <div className="inputContainer">
             <label htmlFor="other">اسم الصنايعي :</label>
             <input
               name="other"
@@ -81,7 +72,7 @@ export const AddTubes = ({ id, setAddOpen, type }) => {
             />
           </div>
         )}
-        <div className="formItem">
+        <div className="inputContainer">
           <label htmlFor="price">السعر:</label>
           <input
             name="price"
@@ -90,22 +81,14 @@ export const AddTubes = ({ id, setAddOpen, type }) => {
             onChange={(e) => setPrice(e.target.value)}
           />
         </div>
-        {loading === true ? (
-          <div class="lds-ellipsis">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-        ) : (
-          <button
-            className="addButton"
-            disabled={note === "" ? true : false}
-            onClick={handleAdd}
-          >
-            أضافه
+        <div className="inputButtons">
+          <button className="doneBtn" onClick={handleAdd}>
+            {loading === true ? "برجاء الانتظار" : "إضافه"}
           </button>
-        )}
+          <button className="cancelBtn" onClick={() => setAddOpen(false)}>
+            إالغاء
+          </button>
+        </div>
       </form>
     </div>
   );

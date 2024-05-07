@@ -1,28 +1,168 @@
-/* .navBar{
-    display: none;
-} */
-.login{
-    /* background-color: white; */
-    color: white !important;
+/*=============== GOOGLE FONTS ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+a {
+    text-decoration: none;
+}
+/*=============== LOGIN ===============*/
+.login {  
     height: 100vh;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    font-family: "Poppins",sans-serif;
+    background-image: linear-gradient(to right, #08051A, #201942);
+    width: 100vw;
+    background-repeat: no-repeat;
 }
-/* .contentContainer{
-background-color: white;
-} */
-label{
-    color: white;
+.loginForm {
+    margin-inline: 1.5rem;
+    background-color: hsla(0, 0%, 100%, .01);
+    border: 2px solid hsla(0, 0%, 100%, .7);
+    padding: 2.5rem 1rem;
+    color: hsl(0, 0%, 100%);
+    border-radius: 1rem;
+    backdrop-filter: blur(16px);
+    padding: 30px;
+     width: 100%;
+     height: max-content;
 }
-.MuiTypography-root.MuiTypography-body1.MuiFormControlLabel-label.css-ahj2mt-MuiTypography-root{
-    color: white;
-    text-align: left;
+
+.loginTitle {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 1.25rem;
 }
-.MuiInputBase-input.MuiOutlinedInput-input.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input,
-.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.css-i4bv87-MuiSvgIcon-root,
-.MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated.MuiInputLabel-shrink.MuiInputLabel-sizeMedium.MuiInputLabel-outlined.MuiFormLabel-colorPrimary.MuiFormLabel-filled.Mui-required.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated.MuiInputLabel-shrink.MuiInputLabel-sizeMedium.MuiInputLabel-outlined.css-1jy569b-MuiFormLabel-root-MuiInputLabel-root,
-.MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated.MuiInputLabel-sizeMedium.MuiInputLabel-outlined.MuiFormLabel-colorPrimary.Mui-required.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated.MuiInputLabel-sizeMedium.MuiInputLabel-outlined.css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root,
-.MuiOutlinedInput-notchedOutline.css-1d3z3hw-MuiOutlinedInput-notchedOutline{
-    color:white;
+
+.loginInputs,
+.loginBox {
+    display: grid;
 }
-.MuiOutlinedInput-notchedOutline.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
-border-color: white;
+
+.loginInputs {
+    row-gap: 15%;
+    margin-bottom: 5%;
+}
+
+.loginBox {
+    grid-template-columns: 1fr max-content;
+    column-gap: .75rem;
+    align-items: center;
+    border: 2px solid hsla(0, 0%, 100%, .7);
+    padding-inline: 1.25rem;
+    border-radius: 4rem;
+}
+
+.login__input,
+.login__button {
+    border: none;
+    outline: none;
+}
+
+.login__input {
+    width: 100%;
+    background: none;
+    color: hsl(0, 0%, 100%);
+    padding-block: 1rem;
+}
+
+.login__input::placeholder {
+    color: hsl(0, 0%, 100%);
+}
+
+.login__box i {
+    font-size: 1.25rem;
+}
+
+.login__check,
+.login__check-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.login__check {
+    margin-bottom: 1rem;
+    font-size: .813rem;
+    margin-top: 30px;
+}
+
+.login__check-box {
+    column-gap: .5rem;    
+}
+
+.login__check-input {
+    width: 1rem;
+    height: 1rem;
+    accent-color:hsl(0, 0%, 100%);
+}
+
+.login__forgot {
+    color: hsl(0, 0%, 100%);
+    margin-top: 10px;
+}
+
+.login__forgot:hover {
+    text-decoration: underline;
+}
+
+.login__button {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background-color:hsl(0, 0%, 100%);
+    border-radius: 4rem;
+    color: hsl(0, 0%, 0%);
+    font-weight: 500;
+    cursor: pointer;
+}
+.erorrHandle{
+    color:red;
+    text-align: center;
+}
+.login__register {
+    font-size: .813rem;
+    text-align: center;
+}
+
+.login__register a {
+    color: hsl(0, 0%, 100%);
+    font-weight: 500;
+}
+
+.login__register a:hover {
+    text-decoration: underline;
+}
+
+/*=============== BREAKPOINTS ===============*/
+/* For medium devices */
+@media screen and (max-width: 576px) {
+    .login {
+        justify-content: center;   
+        height: 100vh;   
+        background-repeat: repeat;
+    }
+  .login  .loginForm {
+    position: relative;
+        margin-inline: 1.5rem;
+        background-color: hsla(0, 0%, 100%, .01);
+        border: 2px solid hsla(0, 0%, 100%, .7);
+        padding: 2.5rem 1rem;
+        color: hsl(0, 0%, 100%);
+        border-radius: 1rem;
+        -webkit-backdrop-filter: blur(16px);
+        backdrop-filter: blur(16px);
+width: 100% !important;
+    /* height: 60% !important; */
+    top: 1%;
+    left: -7%
+    }
+   .loginForm .loginTitle {
+        margin-bottom: 2rem;
+    }
+    .login__forgot{
+        margin-top: 10px;
+    }
+    .login__check-box{
+        display: none;
+    }
 }

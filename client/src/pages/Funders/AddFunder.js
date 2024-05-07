@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 
 export const AddFunder = ({ setAddOpen, id }) => {
   const [inputs, setInputs] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const handleInputs = (e) => {
     setInputs((prev) => {
@@ -13,28 +14,30 @@ export const AddFunder = ({ setAddOpen, id }) => {
   const addFunderDetails = async (e) => {
     try {
       e.preventDefault();
-      const res = await axios.post(
-        "https://api.albahren.com/api/funderDetails",
-        {
-          ...inputs,
-          value: inputs.quantity * inputs.price,
-          funderCompanyId: id,
-        }
-      );
-      res.status === 200 && toast.success("تمت اضافه بنجاح");
-      setAddOpen(false);
+      if (inputs == {}) {
+        toast.error("برجاء ادخال العناصر كامله");
+      } else {
+        setLoading(true);
+        const res = await axios.post(
+          "https://api.albahren.com/api/funderDetails",
+          {
+            ...inputs,
+            value: inputs.quantity * inputs.price,
+            funderCompanyId: id,
+          }
+        );
+        res.status === 200 && toast.success("تمت اضافه بنجاح");
+        setLoading(false);
+        setAddOpen(false);
+      }
     } catch (err) {
       console.log(err);
     }
   };
   return (
-    <div className="myModal">
-      <span className="close" onClick={() => setAddOpen(false)}>
-        X
-      </span>
-      <h1>{`أضافه عنصر جديد`}</h1>
-      <form>
-        <div class="mb-3">
+    <div className="addWrapper">
+      <div className="inputsContainer">
+        <div className="inputContainer">
           <label htmlFor="name" class="form-label">
             اسم البيان
           </label>
@@ -47,7 +50,7 @@ export const AddFunder = ({ setAddOpen, id }) => {
             focus={true}
           />
         </div>
-        <div class="mb-3">
+        <div className="inputContainer">
           <label htmlFor="quantity" class="form-label">
             الكميه
           </label>
@@ -59,7 +62,9 @@ export const AddFunder = ({ setAddOpen, id }) => {
             onChange={handleInputs}
           />
         </div>
-        <div class="mb-3">
+      </div>
+      <div className="inputsContainer">
+        <div className="inputContainer">
           <label htmlFor="recived" class="form-label">
             المستلم
           </label>
@@ -71,7 +76,7 @@ export const AddFunder = ({ setAddOpen, id }) => {
             required
           />
         </div>
-        <div class="mb-3">
+        <div className="inputContainer">
           <label htmlFor="site" class="form-label">
             الموقع
           </label>
@@ -83,7 +88,9 @@ export const AddFunder = ({ setAddOpen, id }) => {
             onChange={handleInputs}
           />
         </div>
-        <div class="mb-3">
+      </div>
+      <div className="inputsContainer">
+        <div className="inputContainer">
           <label htmlFor="storeType" class="form-label">
             المخزن
           </label>
@@ -95,7 +102,7 @@ export const AddFunder = ({ setAddOpen, id }) => {
             onChange={handleInputs}
           />
         </div>
-        <div class="mb-3">
+        <div className="inputContainer">
           <label htmlFor="value" class="form-label">
             سعر الوحده:
           </label>
@@ -107,14 +114,15 @@ export const AddFunder = ({ setAddOpen, id }) => {
             onChange={handleInputs}
           />
         </div>
-        <button
-          type="submit"
-          class="btn btn-primary"
-          onClick={addFunderDetails}
-        >
-          أضافه
+      </div>
+      <div className="inputButtons">
+        <button className="doneBtn" onClick={addFunderDetails}>
+          {loading === true ? "برجاء الانتظار" : "إضافه"}
         </button>
-      </form>
+        <button className="cancelBtn" onClick={() => setAddOpen(false)}>
+          إالغاء
+        </button>
+      </div>
     </div>
   );
 };

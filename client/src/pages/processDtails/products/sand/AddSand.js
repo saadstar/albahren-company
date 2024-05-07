@@ -39,19 +39,10 @@ export const AddSand = ({ id, setAddOpen, type, ar }) => {
     }
   };
   return (
-    <div className="modalll">
-      <span className="close" onClick={() => setAddOpen(false)}>
-        X
-      </span>
-      <h1>{`أضافه عنصر جديد`}</h1>
+    <div className="addWrapper">
       <form onSubmit={(e) => e.preventDefault}>
-        <div className="formItem">
+        <div className="inputContainer">
           <label htmlFor="notes">اسم البيان: </label>
-          {note === "" && (
-            <span style={{ color: "red", fontSize: "10px", fontWeight: "300" }}>
-              برجاء ادخل البيان
-            </span>
-          )}
           <input
             name="notes"
             placeholder={"مثل: مطبق من 0 الي 1 "}
@@ -59,7 +50,7 @@ export const AddSand = ({ id, setAddOpen, type, ar }) => {
             onChange={(e) => setNote(e.target.value)}
           />
         </div>
-        <div className="formItem">
+        <div className="inputContainer">
           <label htmlFor="precentage">
             {type === "sand" ? "طول المواسير :" : "عدد الغرف :"}
           </label>
@@ -72,7 +63,7 @@ export const AddSand = ({ id, setAddOpen, type, ar }) => {
             onChange={(e) => setPercentage(e.target.value)}
           />
         </div>
-        <div className="formItem">
+        <div className="inputContainer">
           <label htmlFor="quantity">{`كميه ${ar} ${
             type === "cement" ? "بالطن" : "بالمتر المكعب"
           } :`}</label>
@@ -85,7 +76,7 @@ export const AddSand = ({ id, setAddOpen, type, ar }) => {
             onChange={(e) => setQuantity(e.target.value)}
           />
         </div>
-        <div className="formItem">
+        <div className="inputContainer">
           <label htmlFor="price">{`سعر ${ar}:`}</label>
           <input
             name="price"
@@ -96,22 +87,14 @@ export const AddSand = ({ id, setAddOpen, type, ar }) => {
             onChange={(e) => setPrice(e.target.value)}
           />
         </div>
-        {loading === true ? (
-          <div class="lds-ellipsis">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-        ) : (
-          <button
-            className="addButton"
-            disabled={note === "" ? true : false}
-            onClick={handleAdd}
-          >
-            أضافه
+        <div className="inputButtons">
+          <button className="doneBtn" onClick={handleAdd}>
+            {loading === true ? "برجاء الانتظار" : "إضافه"}
           </button>
-        )}
+          <button className="cancelBtn" onClick={() => setAddOpen(false)}>
+            إالغاء
+          </button>
+        </div>
       </form>
     </div>
   );

@@ -1,28 +1,30 @@
 import React, { useContext, useEffect, useState } from "react";
-import "./store.css";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import "../usersFeatures/user.css";
+import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
-import { AddStore } from "./AddStore";
 import { MoveTwo } from "./MoveTwo";
 import { ShowImg } from "./ShowImg";
-import { Out } from "./Out";
-import { Link } from "react-router-dom";
+import { MoveToOutStore } from "./MoveToOutStore";
 import { DeleteStore } from "./DeleteStore";
 import { AuthContext } from "../../auth/authContext/authContext";
+import { LoadingPage } from "../../Loading/LoadingPage";
+import { Box, useTheme } from "@mui/material";
+import { tokens } from "../../theme";
+import Header from "../../components/Header";
+import { toast } from "react-toastify";
 
-export const Store = ({ type }) => {
-  const [addOpen, setAddOpen] = useState(false);
+export const Store = ({ exist, ar }) => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   const [showOpen, setShowOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
   const [outOpen, setOutOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [deleteUserId, setDeleteUserId] = useState("");
-  const [exist, setExist] = useState(1);
   const [rowData, setRowData] = useState([]);
   const [editData, setEditData] = useState(undefined);
   const [showData, setShowData] = useState(undefined);
-  const existData = rowData.filter((item) => item.exist === 1);
-  const ExistTwoData = rowData.filter((item) => item.exist === 2);
+  const existData = rowData.filter((item) => item.exist === exist);
   const { user } = useContext(AuthContext);
 
   const fetchData = async () => {
@@ -40,24 +42,19 @@ export const Store = ({ type }) => {
     {
       field: "name",
       headerName: "اسم العنصر",
-      width: 220,
-      editable: false,
+      flex: 1,
     },
     {
       field: "quantity",
-      headerName: "الكميه",
-      width: 80,
-      editable: false,
+      headerName: exist === 2 ? "أصل الكميه" : "الكميه",
     },
     {
-      field: "createdAt",
+      field: exist === 2 ? "updatedAt" : "createdAt",
       headerName: "التاريخ",
-      width: 130,
     },
     {
       field: "filename",
       headerName: "صورة البون",
-      width: 120,
       renderCell: (params) => {
         const showHandler = () => {
           if (window.scrollY != 0) {
@@ -67,20 +64,17 @@ export const Store = ({ type }) => {
           setShowOpen(true);
         };
         return (
-          <button
-            style={{ cursor: "pointer" }}
-            className="btn btn-outline-primary"
-            onClick={showHandler}
-          >
-            عرض الصوره
-          </button>
+          <div className="actionWrapper">
+            <button className="storeColumnButton" onClick={showHandler}>
+              عرض البون
+            </button>
+          </div>
         );
       },
     },
-    {
+    exist === 1 && {
       field: "exist",
       headerName: "صرف فرعي",
-      width: 80,
       renderCell: (params) => {
         const editHandler = () => {
           if (window.scrollY != 0) {
@@ -90,18 +84,17 @@ export const Store = ({ type }) => {
           setEditOpen(true);
         };
         return (
-          <div className="action">
-            <button className="storeActionButton" onClick={editHandler}>
+          <div className="actionWrapper">
+            <button className="storeColumnButton" onClick={editHandler}>
               صرف
             </button>
           </div>
         );
       },
     },
-    {
+    exist === 1 && {
       field: "Action",
       headerName: "حذف",
-      width: 60,
       renderCell: (params) => {
         const deleteHandler = () => {
           if (window.scrollY != 0) {
@@ -111,7 +104,7 @@ export const Store = ({ type }) => {
           setDeleteOpen(true);
         };
         return (
-          <div className="action">
+          <div className="actionWrapper">
             <i
               class="fa-solid fa-trash"
               style={{ color: "red", fontSize: "20px" }}
@@ -121,83 +114,7 @@ export const Store = ({ type }) => {
         );
       },
     },
-    {
-      field: "entry",
-      headerName: "المدخل",
-      width: 100,
-      editable: false,
-    },
-  ];
-  const rows = existData.reverse().map((item) => {
-    return {
-      id: item._id,
-      name: item.name,
-      quantity: item.quantity,
-      createdAt: item.createdAt.split("T")[0],
-      filename: item.filename,
-      entry: user.username,
-    };
-  });
-  const existTwoColumns = [
-    {
-      field: "name",
-      headerName: "اسم العنصر",
-      width: 190,
-      editable: false,
-    },
-    {
-      field: "quantityOut",
-      headerName: "الكميه",
-      width: 90,
-      editable: false,
-    },
-    {
-      field: "quantity",
-      headerName: "أصل الكميه",
-      width: 90,
-      editable: false,
-    },
-    {
-      field: "updatedAt",
-      headerName: "التاريخ",
-      width: 120,
-    },
-    {
-      field: "nameOne",
-      headerName: "المهندس المستلم",
-      width: 120,
-      editable: false,
-    },
-    {
-      field: "nameTwo",
-      headerName: "المقاول المستلم",
-      width: 120,
-      editable: false,
-    },
-    {
-      field: "filename",
-      headerName: "صورة البون",
-      width: 120,
-      renderCell: (params) => {
-        const showHandler = () => {
-          if (window.scrollY != 0) {
-            window.scrollTo(0, window.scrollY === 0);
-          }
-          setShowData(params.row);
-          setShowOpen(!showOpen);
-        };
-        return (
-          <button
-            style={{ cursor: "pointer" }}
-            className="btn btn-outline-primary"
-            onClick={showHandler}
-          >
-            عرض الصوره
-          </button>
-        );
-      },
-    },
-    {
+    exist === 2 && {
       field: "exist",
       headerName: "صرف نهائي",
       width: 100,
@@ -210,90 +127,128 @@ export const Store = ({ type }) => {
           setOutOpen(true);
         };
         return (
-          <div className="action">
-            <button className="storeActionButton" onClick={editHandler}>
+          <div className="actionWrapper">
+            <button className="storeColumnButton" onClick={editHandler}>
               صرف نهائي
             </button>
           </div>
         );
       },
     },
-    {
-      field: "entry",
-      headerName: "المدخل",
-      width: 50,
+    exist !== 1 && {
+      field: "quantityOut",
+      headerName: "الكميه",
+      width: 90,
       editable: false,
     },
+    exist !== 1 && {
+      field: "nameOne",
+      headerName: "المهندس المستلم",
+      width: 120,
+      editable: false,
+    },
+    exist !== 1 && {
+      field: "nameTwo",
+      headerName: "المقاول المستلم",
+      width: 120,
+      editable: false,
+    },
+    exist === 3 && {
+      field: "driver",
+      headerName: "السائق",
+    },
+    exist === 3 && {
+      field: "return",
+      headerName: "اعاده",
+      width: 100,
+      renderCell: (params) => {
+        const retrunStore = async (e) => {
+          try {
+            e.preventDefault();
+            const res = await axios.put(
+              `https://api.albahren.com/api/store/${params.row.id}`,
+              { exist: 1 }
+            );
+            res.status === 200 && toast.success("تمت الأعاده.");
+          } catch (err) {
+            console.log(err);
+          }
+        };
+        return (
+          <div className="actionWrapper">
+            <button className="storeColumnButton" onClick={retrunStore}>
+              أعاده للمخزن
+            </button>
+          </div>
+        );
+      },
+    },
   ];
-  const existTwoRows = ExistTwoData.reverse().map((item) => {
+  const rows = existData.reverse().map((item) => {
     return {
       id: item._id,
       name: item.name,
       quantity: item.quantity,
-      quantityOut: item.quantityOut,
-      updatedAt: item.updatedAt.split("T")[0],
+      createdAt: item.createdAt.split("T")[0],
       filename: item.filename,
+      entry: user.username,
+      quantityOut: item.quantityOut,
       nameOne: item.nameOne,
       nameTwo: item.nameTwo,
-      entry: user.username,
+      updatedAt: item.updatedAt.split("T")[0],
+      driver: item.driver,
     };
   });
   return (
-    <div className="store">
-      <nav className="full-width mb-3">
-        <div className="d-flex">
-          <h1 onClick={() => setExist(1)}>المخزن الرئيسي</h1>
-          <h1 onClick={() => setExist(2)}>المخزن الفرعي</h1>
-          <Link to="/outStore" style={{ textDecoration: "none" }}>
-            <h1 onClick={() => setExist(3)}>المنصرف</h1>
-          </Link>
-        </div>
-      </nav>
-      <div className="">
-        <div className="storeHeader">
-          {exist === 1 ? <h1>المخزن الرئيسي</h1> : <h1>المخزن الفرعي</h1>}
-          {exist === 1 && (
-            <button className="" onClick={() => setAddOpen(!addOpen)}>
-              أضافه عنصر
-            </button>
-          )}
-        </div>
-        {rowData.length === 0 ? (
-          <div class="">لا يوجد عناصر</div>
-        ) : (
-          <div className="dataTable">
-            <DataGrid
-              className="dataGrid"
-              rows={exist === 1 ? rows : existTwoRows}
-              columns={exist === 1 ? columns : existTwoColumns}
-              initialState={{
-                pagination: {
-                  paginationModel: {
-                    pageSize: 99,
-                  },
+    <div className="users">
+      {rowData.length === 0 ? (
+        <LoadingPage />
+      ) : (
+        <div className="main-marg">
+          <Box className="headerBox">
+            <Header title={ar} style={{ color: "#FFB801" }} />
+          </Box>
+          <Box
+            m="10px 0 0 0"
+            height="75vh"
+            border="1px solid #6E6C77"
+            borderRadius={2}
+            sx={{
+              "& .MuiDataGrid-root.MuiDataGrid-root--densityStandard.css-1kt8ah5-MuiDataGrid-root":
+                {
+                  border: "none",
                 },
-              }}
-              slots={{ toolbar: GridToolbar }}
-              slotProps={{
-                toolbar: {
-                  showQuickFilter: true,
-                  quickFilterProps: { debounceMs: 500 },
-                },
-              }}
-              pageSizeOptions={[5]}
-              checkboxSelection
-              disableRowSelectionOnClick
-              disableColumnFilter
-              disableColumnSelector
-              disableDensitySelector
-            />
-          </div>
-        )}
-      </div>
-      {addOpen && <AddStore setAddOpen={setAddOpen} />}
-      {editOpen && <MoveTwo setEditOpen={setEditOpen} editData={editData} />}
+              "& .MuiDataGrid-cell": {
+                borderBottom: "none",
+              },
+              "& .name-column--cell": {
+                color: colors.greenAccent[500],
+              },
+              "& .MuiDataGrid-columnHeaders": {
+                backgroundColor: colors.primary[500],
+                borderBottom: "1px solid #6E6C77",
+              },
+              "& .MuiDataGrid-virtualScroller": {
+                backgroundColor: colors.primary[400],
+              },
+              "& .MuiDataGrid-footerContainer": {
+                borderTop: "none",
+                backgroundColor: colors.primary[500],
+              },
+              "& .MuiCheckbox-root": {
+                color: `${colors.greenAccent[200]} !important`,
+              },
+            }}
+          >
+            <DataGrid rows={rows} columns={columns} />
+          </Box>
+        </div>
+      )}
       {showOpen && <ShowImg setShowOpen={setShowOpen} showData={showData} />}
-      {outOpen && <Out setOutOpen={setOutOpen} editData={editData} />}
+      {editOpen && <MoveTwo setEditOpen={setEditOpen} editData={editData} />}
+      {outOpen && (
+        <MoveToOutStore setOutOpen={setOutOpen} editData={editData} />
+      )}
       {deleteOpen && (
         <DeleteStore
           setDeleteOpen={setDeleteOpen}

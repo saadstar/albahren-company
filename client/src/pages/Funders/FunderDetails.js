@@ -1,19 +1,20 @@
 import React, { useState, useEffect, useContext } from "react";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 import "./funder.css";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { AddFunder } from "./AddFunder";
 import { DeleteFunder } from "./DeleteFunder";
+import { Box, useTheme } from "@mui/material";
+import { tokens } from "../../theme";
+import Header from "../../components/Header";
 import { AuthContext } from "../../auth/authContext/authContext";
 
 export const FunderDetails = () => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   const [addOpen, setAddOpen] = useState(false);
   const [rowData, setRowData] = useState([]);
-  const [search, setSearch] = useState("");
-  const filtredData = rowData.filter((item) =>
-    search === "" ? item : item.name === search
-  );
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [deleteUserId, setDeleteUserId] = useState("");
   const { id } = useParams();
@@ -86,7 +87,7 @@ export const FunderDetails = () => {
           setDeleteOpen(true);
         };
         return (
-          <div className="action">
+          <div className="actionWrapper">
             <i
               class="fa-solid fa-trash"
               style={{ color: "red", fontSize: "20px" }}
@@ -96,13 +97,8 @@ export const FunderDetails = () => {
         );
       },
     },
-    {
-      field: "entry",
-      headerName: "المدخل",
-      width: 40,
-    },
   ];
-  const rows = filtredData.reverse().map((item) => {
+  const rows = rowData.reverse().map((item) => {
     return {
       id: item._id,
       name: item.name,
@@ -117,63 +113,58 @@ export const FunderDetails = () => {
     };
   });
   return (
-    <div className="contentContainer">
-      <div className="funderHeader d-flex gap-4 mb-2">
-        <h1>الموردين</h1>
-        <button
-          className="border-raduis-2 fw-bold"
-          onClick={() => setAddOpen(!addOpen)}
-        >
-          أضافه عنصر
-        </button>
-      </div>
-      <div
-        class="d-flex mb-4 align-center justify-content-center gap-2"
-        role="search"
-      >
-        <input
-          class="form-control w-50 me-2 p-2"
-          onChange={(e) => setSearch(e.target.value)}
-          type="search"
-          placeholder="ابحث باسم العنصر"
-          aria-label="Search"
-        />
-        <button type="button" class="btn btn-light">
-          بحث
-        </button>
-      </div>
-      {filtredData.length === 0 ? (
-        <div class="">لا يوجد عناصر</div>
-      ) : (
-        <div className="dataTable">
-          <DataGrid
-            className="dataGrid"
-            rows={rows}
-            columns={columns}
-            initialState={{
-              pagination: {
-                paginationModel: {
-                  pageSize: 100,
-                },
-              },
-            }}
-            slots={{ toolbar: GridToolbar }}
-            slotProps={{
-              toolbar: {
-                showQuickFilter: true,
-                quickFilterProps: { debounceMs: 500 },
-              },
-            }}
-            pageSizeOptions={[5]}
-            checkboxSelection
-            disableRowSelectionOnClick
-            disableColumnFilter
-            disableColumnSelector
-            disableDensitySelector
+    <div className="users">
+      <div className="main-marg">
+        <Box className="headerBox">
+          <Header
+            title={addOpen === true ? `إضافه ممول` : "الممولين"}
+            subtitle={`استكشف كل شركات التمويل هنا`}
           />
-        </div>
-      )}
-      {addOpen && <AddFunder setAddOpen={setAddOpen} id={id} />}
+          <button onClick={() => setAddOpen(!addOpen)}>
+            {addOpen === true ? "رجوع" : `إضافه شركه تمويل`}
+          </button>
+        </Box>
+        {addOpen === false ? (
+          <Box
+            m="10px 0 0 0"
+            height="70vh"
+            border="1px solid #6E6C77"
+            borderRadius={2}
+            sx={{
+              "& .MuiDataGrid-root.MuiDataGrid-root--densityStandard.css-1kt8ah5-MuiDataGrid-root":
+                {
+                  border: "none",
+                },
+              "& .MuiDataGrid-cell": {
+                borderBottom: "none",
+              },
+              "& .name-column--cell": {
+                color: colors.greenAccent[500],
+              },
+              "& .MuiDataGrid-columnHeaders": {
+                backgroundColor: colors.primary[500],
+                borderBottom: "1px solid #6E6C77",
+              },
+              "& .MuiDataGrid-virtualScroller": {
+                backgroundColor: colors.primary[400],
+              },
+              "& .MuiDataGrid-footerContainer": {
+                borderTop: "none",
+                backgroundColor: colors.primary[500],
+              },
+              "& .MuiCheckbox-root": {
+                color: `${colors.greenAccent[200]} !important`,
+              },
+            }}
+          >
+            <DataGrid rows={rows} columns={columns} />
+          </Box>
+        ) : (
+          <>
+            <AddFunder setAddOpen={setAddOpen} id={id} />
+          </>
+        )}
+      </div>
       {deleteOpen && (
         <DeleteFunder
           setDeleteOpen={setDeleteOpen}

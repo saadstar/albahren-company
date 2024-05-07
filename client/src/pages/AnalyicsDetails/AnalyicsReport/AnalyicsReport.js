@@ -4,7 +4,7 @@ import { BarChartBox } from "./BarChart";
 import { Inflication } from "./Inflication";
 import { HrChart } from "./HrChart";
 import axios from "axios";
-import { FinalReport } from "./FinalReport";
+import { Link } from "react-router-dom";
 
 export const AnalyicsReport = ({ dataNum }) => {
   const { id } = useParams();
@@ -12,6 +12,7 @@ export const AnalyicsReport = ({ dataNum }) => {
   const [data1, setData1] = useState([]);
   const [analyicsData, setAnalyicsData] = useState([]);
   const [loading, setLoading] = useState(false);
+
   const fetchAnalyicsData = async () => {
     try {
       const res = await axios.get(
@@ -52,15 +53,18 @@ export const AnalyicsReport = ({ dataNum }) => {
   useEffect(() => {
     fetchdata1();
     fetchdata2();
-  }, []);
+  });
   return (
     <>
       {data2.length === 0 ? (
-        <div className="anlyicsReport">
-          <h1 className="color-red">برجاء أضافه الاسعار الحاليه للبنود.</h1>
+        <div className="headerBox  main-marg">
+          <h1 className="">برجاء أضافه الاسعار الحاليه للبنود.</h1>
+          <button>
+            <Link to={`/analyics/${id}`}>رجوع</Link>
+          </button>
         </div>
       ) : (
-        <div className="anlyicsReport">
+        <div className="anlyicsReport main-marg">
           <BarChartBox data={data1} price="one" analyicsData={analyicsData} />
           <BarChartBox data={data2} analyicsData={analyicsData} />
           <div className="report-title p-3">

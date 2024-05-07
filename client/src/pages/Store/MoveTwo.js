@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import "../usersFeatures/user.css";
 
 export const MoveTwo = ({ setEditOpen, editData }) => {
   const [nameOne, setNameOne] = useState("لا يوجد");
@@ -55,14 +56,14 @@ export const MoveTwo = ({ setEditOpen, editData }) => {
     }
   };
   return (
-    <div className="addTubes">
-      <div className="modalll">
+    <div className="add">
+      <div className="deleteModal">
         <span className="close" onClick={() => setEditOpen(false)}>
           X
         </span>
-        <h1>{`صرف العنصر`}</h1>
+        <h2 className="headerBox">{`صرف العنصر`}</h2>
         <form onSubmit={(e) => e.preventDefault}>
-          <div className="formItem">
+          <div className="inputContainer" style={{ width: "30vw !important" }}>
             <label htmlFor="nameOne">المهندس المستلم : </label>
             <input
               name="nameOne"
@@ -72,7 +73,7 @@ export const MoveTwo = ({ setEditOpen, editData }) => {
               required
             />
           </div>
-          <div className="formItem">
+          <div className="inputContainer" style={{ width: "30vw !important" }}>
             <label htmlFor="nameTwo">المقاول المستلم : </label>
             <input
               name="nameTwo"
@@ -82,7 +83,7 @@ export const MoveTwo = ({ setEditOpen, editData }) => {
               required
             />
           </div>
-          <div className="mb-3">
+          <div className="mb-3" style={{ marginBottom: "10px" }}>
             <div class="form-check form-switch">
               <input
                 class="form-check-input"
@@ -96,7 +97,7 @@ export const MoveTwo = ({ setEditOpen, editData }) => {
               </label>
             </div>
             {openQuantity && (
-              <div className="formItem">
+              <div className="inputContainer">
                 <label htmlFor="quantityOut">الكميه المصروفه : </label>
                 <input
                   name="quantityOut"
@@ -107,10 +108,10 @@ export const MoveTwo = ({ setEditOpen, editData }) => {
             )}
           </div>
           {loading === true ? (
-            <span className="loader"></span>
+            <h2 className="headerBox">Please Wait...</h2>
           ) : (
             <button
-              className="addButton"
+              className=" deleteAdminCancel addButton"
               onClick={
                 quantityOut === editData.quantity ? editHandler : butnHandler
               }

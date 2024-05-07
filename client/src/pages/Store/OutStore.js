@@ -5,6 +5,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { ShowImg } from "./ShowImg";
 import { toast } from "react-toastify";
+import { LoadingPage } from "../../Loading/LoadingPage";
 
 export const OutStore = () => {
   const [rowData, setRowData] = useState([]);
@@ -23,7 +24,6 @@ export const OutStore = () => {
     };
     fetchData();
   }, [rowData.id]);
-
   const columns = [
     {
       field: "name",
@@ -80,36 +80,6 @@ export const OutStore = () => {
         );
       },
     },
-    {
-      field: "driver",
-      headerName: "السائق",
-      width: 150,
-      editable: false,
-    },
-    {
-      field: "return",
-      headerName: "اعاده",
-      width: 100,
-      renderCell: (params) => {
-        const retrunStore = async (e) => {
-          try {
-            e.preventDefault();
-            const res = await axios.put(
-              `https://api.albahren.com/api/store/${params.row.id}`,
-              { exist: 1 }
-            );
-            res.status === 200 && toast.success("تمت الأعاده.");
-          } catch (err) {
-            console.log(err);
-          }
-        };
-        return (
-          <button className="btn btn-outline-primary" onClick={retrunStore}>
-            أعاده للمخزن
-          </button>
-        );
-      },
-    },
   ];
   const rows = filteredData.reverse().map((item) => {
     return {
@@ -144,7 +114,7 @@ export const OutStore = () => {
           <h1>المنصرف </h1>
         </div>
         {filteredData.length === 0 ? (
-          <div class="">لا يوجد عناصر منصرفه</div>
+          <LoadingPage />
         ) : (
           <div className="dataTable">
             <DataGrid

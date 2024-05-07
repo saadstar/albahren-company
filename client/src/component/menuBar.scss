@@ -1,0 +1,142 @@
+.menuBar {
+    font-family: "Poppins", sans-serif !important;
+    width: 24vw;
+    position: relative;
+    .menuOppener {
+        cursor: pointer;
+        position: absolute;
+        top: 0.5%;
+        left: 2%;
+        z-index: 9999999;
+        color: red;
+        .closeIcon {
+            margin: 0;
+            border: 1px solid;
+            border-radius: 10px;
+            font-size: 30px;
+        }
+    }
+
+    .menuBarWrapper {
+        margin: 10px;
+        margin-top: 20px;
+        border-radius: 20px;
+        background-color: #eaeaea22;
+        backdrop-filter: blur(15px);
+        height: max-content;
+        overflow-y: auto;
+        max-height: 96vh;
+        position: fixed;
+        top: 0;
+        width: 18vw;
+        .imgLogo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 5px;
+
+            img {
+                width: 40%;
+                height: 40%;
+            }
+        }
+        hr {
+            margin-left: 10%;
+            color: linear-gradient(to right, white, #FFB801, white);
+            height: 0px;
+            width: 80%;
+        }
+        .menuItems {
+            margin: 20px 0px;
+            .menuItemWrapper {
+                .menuItemHeader {
+                    margin-right: 10%;
+                    font-size: 12px;
+                    font-style: normal;
+                    font-weight: 800;
+                    line-height: 150%;
+                    color: #FFB801;
+                }
+                .menuItemContent {
+                    padding: 0% 10%;
+                    margin: 10px 0px;
+                    cursor: pointer;
+                    &.active,
+                    &:hover {
+                        border-left: 2px solid #FFB801;
+                        .menuContentContainer {
+                            background-color: #8f94f385;
+                            border-radius: 10px;
+                            color: #FFF;
+                            .icon {
+                                background-color: #FFB801;
+                                color: #FFF;
+                            }
+                            h6 {
+                                font-weight: bold;
+                            }
+                        }
+                    }
+
+                    .menuContentContainer {
+                        display: flex;
+                        flex-direction: row;
+                        color: #CDCDCD;
+                        padding: 5px;
+                        display: flex;
+                        align-items: center;
+                        gap: 7px;
+                        .icon {
+                            background-color: #8f94f385;
+                            padding: 2px;
+                            margin-left: 3px;
+                            border-radius: 7px;
+                            font-size: 24px;
+                            font-weight: 300;
+                        }
+
+                        h6 {
+                            margin-top: 0.5rem;
+                            margin-bottom: .5rem;
+                            font-weight: 300;
+                            line-height: 1.1;
+                            margin-left: 4px;
+                            font-size: 14px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.w-zero {
+    width: 0vw;
+
+    .menuOppener {
+        position: fixed;
+        top: 2.7%;
+        z-index: 999999999;
+        left: 8px;
+        cursor: pointer;
+
+        .menuIcon {
+            margin: 0;
+            font-size: 22px;
+        }
+    }
+
+    .menuBarWrapper {
+        display: none;
+    }
+}
+
+@media only screen and (max-width:500px) {
+    .menuBar {
+        width: 90000000vw;
+        max-height: 100vh;
+        .menuBarWrapper {
+            width: 94vw;
+        }
+    }
+}

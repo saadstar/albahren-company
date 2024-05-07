@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
-import "./analyics.css";
+import "../ProcessHome/processHome.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { AddAnalyics } from "./AddAnalyics";
+import { LoadingPage } from "../../Loading/LoadingPage";
+import { Box } from "@mui/material";
+import Header from "../../components/Header";
 
 export const Analyics = () => {
   const [analyicsData, setAnalyicsData] = useState([]);
-  const [openAddAnalyics, setOpenAddAnalyics] = useState(false);
 
   const fetchAnalyicsData = async () => {
     try {
@@ -19,23 +20,17 @@ export const Analyics = () => {
   useEffect(() => {
     fetchAnalyicsData();
   });
-
   return (
-    <div className="analyics">
+    <div className="processHomeContainer">
+      <Box className="headerBox">
+        <Header title={"التقارير"} subtitle={`استكشف كل التقارير من هنا`} />
+      </Box>
       {analyicsData.length === 0 ? (
-        <div className="card">
-          <h2>لا يوجد عمليات برجاء الأضافه</h2>
-          <button
-            className="card"
-            type="button"
-            class="btn btn-primary"
-            onClick={() => setOpenAddAnalyics(!openAddAnalyics)}
-          >
-            أضافه تحليل جديد
-          </button>
+        <div>
+          <LoadingPage />
         </div>
       ) : (
-        <div className="cardy-flex">
+        <div className="processHome">
           {analyicsData.map((item) => (
             <Link to={`/analyics/${item._id}`} key={item._id}>
               <div className="card">
@@ -48,18 +43,7 @@ export const Analyics = () => {
               </div>
             </Link>
           ))}
-          {/* <!-- Button trigger modal --> */}
-          <button
-            className="card"
-            class="btn btn-primary"
-            onClick={() => setOpenAddAnalyics(!openAddAnalyics)}
-          >
-            أضافه تحليل جديد
-          </button>
         </div>
-      )}
-      {openAddAnalyics && (
-        <AddAnalyics setOpenAddAnalyics={setOpenAddAnalyics} />
       )}
     </div>
   );

@@ -1,41 +1,49 @@
 import React, { useState } from "react";
-import "../car/car.css";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export const AddSallery = ({ setOpenModal }) => {
+export const AddSallery = ({ setAddOpen }) => {
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
   const [salleryNum, setSalleryNum] = useState(0);
   const [added, setAdded] = useState(0);
   const [note, setNote] = useState("");
   const [site, setSite] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const addSalleryHandler = async (e) => {
     try {
       e.preventDefault();
-      const res = await axios.post(`https://api.albahren.com/api/sallery`, {
-        name,
-        role,
-        salleryNum,
-        added,
-        note,
-        site,
-      });
-      res.status === 200 && toast.success("تم اضافه المرتب بنجاح");
-      setOpenModal(false);
+      if (name === "") {
+        toast.error("برجاء ادخال اسم الموظف");
+      } else if (role === "") {
+        toast.error("برجاء ادخال وظيفه الموظف");
+      } else if (salleryNum === 0) {
+        toast.error("برجاء ادخال مرتب الموظف");
+      } else if (site === "") {
+        toast.error("برجاء ادخال اسم الموقع");
+      } else {
+        setLoading(true);
+        const res = await axios.post(`https://api.albahren.com/api/sallery`, {
+          name,
+          role,
+          salleryNum,
+          added,
+          note,
+          site,
+        });
+        res.status === 200 && toast.success("تم اضافه المرتب بنجاح");
+        setLoading(false);
+        setAddOpen(false);
+      }
     } catch (err) {
       console.log(err);
     }
   };
   return (
-    <div className="modalll">
-      <span className="close" onClick={() => setOpenModal(false)}>
-        X
-      </span>
-      <h1>{"أضافه مرتب جديد"}</h1>
-      <form onSubmit={(e) => e.preventDefault}>
-        <div className="formItem">
+    <div className="addWrapper">
+      <div className="inputsContainer">
+        <div className="inputContainer">
           <label htmlFor="name">اسم الموظف:</label>
           <input
             name="name"
@@ -45,7 +53,7 @@ export const AddSallery = ({ setOpenModal }) => {
             required
           />
         </div>
-        <div className="formItem">
+        <div className="inputContainer">
           <label htmlFor="role">الوظيفه: </label>
           <input
             name="role"
@@ -55,7 +63,9 @@ export const AddSallery = ({ setOpenModal }) => {
             onChange={(e) => setRole(e.target.value)}
           />
         </div>
-        <div className="formItem">
+      </div>
+      <div className="inputsContainer">
+        <div className="inputContainer">
           <label htmlFor="salleryNum">الراتب</label>
           <input
             name="salleryNum"
@@ -64,7 +74,7 @@ export const AddSallery = ({ setOpenModal }) => {
             onChange={(e) => setSalleryNum(e.target.value)}
           />
         </div>
-        <div className="formItem">
+        <div className="inputContainer">
           <label htmlFor="added">الحوافز : </label>
           <input
             name="added"
@@ -72,7 +82,9 @@ export const AddSallery = ({ setOpenModal }) => {
             onChange={(e) => setAdded(e.target.value)}
           />
         </div>
-        <div className="formItem">
+      </div>
+      <div className="inputsContainer">
+        <div className="inputContainer">
           <label htmlFor="note">ملاحظات : </label>
           <input
             name="note"
@@ -80,7 +92,7 @@ export const AddSallery = ({ setOpenModal }) => {
             onChange={(e) => setNote(e.target.value)}
           />
         </div>
-        <div className="formItem">
+        <div className="inputContainer">
           <label htmlFor="site">الموقع : </label>
           <input
             name="site"
@@ -88,10 +100,15 @@ export const AddSallery = ({ setOpenModal }) => {
             onChange={(e) => setSite(e.target.value)}
           />
         </div>
-        <button className="addButton" onClick={addSalleryHandler}>
-          أضافه
+      </div>
+      <div className="inputButtons">
+        <button className="doneBtn" onClick={addSalleryHandler}>
+          {loading === true ? "برجاء الانتظار" : "إضافه"}
         </button>
-      </form>
+        <button className="cancelBtn" onClick={() => setAddOpen(false)}>
+          إالغاء
+        </button>
+      </div>
     </div>
   );
 };

@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
-import "./tubes.css";
 import { Menu } from "../../Menu/Menu";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { AddTubes } from "./AddTubes";
 import { DeleteTubes } from "./DeleteTubes";
-import { LoadingPage } from "../../../../Loading/LoadingPage";
+import "../../../usersFeatures/user.css";
+import { Box, useTheme } from "@mui/material";
+import { tokens } from "../../../../theme";
+import Header from "../../../../components/Header";
 
 export const Tubes = ({ type, ar }) => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   const [rowData, setRowData] = useState([]);
   const [addOpen, setAddOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
@@ -71,29 +75,31 @@ export const Tubes = ({ type, ar }) => {
       field: "note",
       headerName: "اسم البيان",
       width: 250,
-      editable: false,
-    }, {
-          field: "quantity",
-          headerName: "الكميه",
-          width: 120,
-          editable: false,
-        },
+    },
+    {
+      field: "quantity",
+      headerName: "الكميه",
+      width: 100,
+    },
     {
       field: "price",
       headerName: "سعر المتر",
-      type: "number",
-      width: 120,
-      editable: true,
+      width: 100,
     },
     {
       field: "value",
       headerName: "اجمالي",
-      width: 180,
+      width: 140,
     },
     {
       field: "createdAt",
       headerName: "التاريخ",
-      width: 120,
+      width: 250,
+    },
+    type === "worker" && {
+      field: "other",
+      headerName: "الصنايعي",
+      width: 100,
     },
     {
       field: "Action",
@@ -105,7 +111,7 @@ export const Tubes = ({ type, ar }) => {
           setDeleteOpen(true);
         };
         return (
-          <div className="action">
+          <div className="actionWrapper">
             <i
               class="fa-solid fa-trash"
               style={{ color: "red", fontSize: "20px" }}
@@ -114,12 +120,6 @@ export const Tubes = ({ type, ar }) => {
           </div>
         );
       },
-    },
-    type === "worker" && {
-      field: "other",
-      headerName: "الصنايعي",
-      width: 150,
-      editable: false,
     },
   ];
   const rows = searchFilteredData.reverse().map((item) => {
@@ -147,69 +147,84 @@ export const Tubes = ({ type, ar }) => {
     fetchRow();
   });
   return (
-    <div className="tubes">
-      <div className="container loober">
-        <div className="menuContainer">
-          <Menu />
-        </div>
-        <div className="contentContainer">
-          <div className="tubesHeader">
-            <h1>{ar}</h1>
-            <button className="" onClick={() => setAddOpen(!addOpen)}>
-              أضافه {ar}
-            </button>
-          </div>
-          {type === "worker" && (
-            <div class="d-flex pb-2" role="search">
-              <input
-                class="form-control me-2"
-                type="search"
-                placeholder="أبحث بالعنصر"
-                aria-label="Search"
-                onChange={(e) => setSearch(e.target.value)}
+    <div className="app">
+      <Menu style={{ marginTop: "120px" }} />
+      <main className="content">
+        <div className="users" style={{ marginTop: "190px" }}>
+          <div className="main-marg">
+            <Box className="headerBox">
+              <Header
+                title={addOpen === true ? `إضافه ${ar}` : ar}
+                subtitle={`استكشف كل ${ar} هنا`}
               />
-            </div>
-          )}
-          {rowData.length === 0 ? (
-            <LoadingPage />
-          ) : (
-            <div className="dataTable">
-              <DataGrid
-                className="dataGrid"
-                rows={rows}
-                columns={columns}
-                initialState={{
-                  pagination: {
-                    paginationModel: {
-                      pageSize: 90,
+              <button onClick={() => setAddOpen(!addOpen)}>
+                {addOpen === true ? "رجوع" : `إضافه ${ar}`}
+              </button>
+            </Box>
+            {/* <div class="d-flex pb-2" role="search">
+          <input
+    class="inputContainer"
+    type="search"
+    placeholder="أبحث باسم الصنايعي"
+    aria-label="Search"
+        onChange={(e) => setSearch(e.target.value)}
+  />
+</div> */}
+            {addOpen === false ? (
+              <Box
+                m="10px 0 0 0"
+                height="70vh"
+                border="1px solid #6E6C77"
+                borderRadius={2}
+                sx={{
+                  "& .MuiDataGrid-root.MuiDataGrid-root--densityStandard.css-1kt8ah5-MuiDataGrid-root":
+                    {
+                      border: "none",
                     },
+                  "& .MuiDataGrid-cell": {
+                    borderBottom: "none",
+                  },
+                  "& .name-column--cell": {
+                    color: colors.greenAccent[500],
+                  },
+                  "& .MuiDataGrid-columnHeaders": {
+                    backgroundColor: colors.primary[500],
+                    borderBottom: "1px solid #6E6C77",
+                  },
+                  "& .MuiDataGrid-virtualScroller": {
+                    backgroundColor: colors.primary[400],
+                  },
+                  "& .MuiDataGrid-footerContainer": {
+                    borderTop: "none",
+                    backgroundColor: colors.primary[500],
+                  },
+                  "& .MuiCheckbox-root": {
+                    color: `${colors.greenAccent[200]} !important`,
                   },
                 }}
-                slots={{ toolbar: GridToolbar }}
-                slotProps={{
-                  toolbar: {
-                    showQuickFilter: true,
-                    quickFilterProps: { debounceMs: 500 },
-                  },
-                }}
-                pageSizeOptions={[5]}
-                checkboxSelection
-                disableRowSelectionOnClick
-                disableColumnFilter
-                disableColumnSelector
-                disableDensitySelector
+              >
+                <DataGrid rows={rows} columns={columns} />
+              </Box>
+            ) : (
+              <>
+                <AddTubes setAddOpen={setAddOpen} id={id} type={type} ar={ar} />
+              </>
+            )}
+          </div>
+          {!addOpen && (
+            <Box className="headerBox">
+              <Header
+                title={Math.floor(fullTotalPrice)}
+                subtitle={`الاجمالي`}
               />
-              <div className="sum">
-                <h2>{`اجمالي الكميات بالمتر: ${Math.round(
-                  fullTotalQuantity
-                )}`}</h2>
-                <h2>{`اجمالي السعر: ${Math.round(fullTotalPrice)}`}</h2>
-              </div>
-            </div>
+              <Header
+                title={Math.floor(fullTotalQuantity)}
+                subtitle={`إجمالي الكميات`}
+              />
+            </Box>
           )}
         </div>
-      </div>
-      {addOpen && <AddTubes setAddOpen={setAddOpen} id={id} type={type} />}
+      </main>
       {deleteOpen && (
         <DeleteTubes
           setDeleteOpen={setDeleteOpen}

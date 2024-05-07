@@ -95,156 +95,158 @@ export const AddAnalyicsDetails = ({ setAddOpen, dataNum, id }) => {
     totalValueHandler();
   });
   return (
-    <div className="modalll">
-      <span className="close" onClick={() => setAddOpen(false)}>
-        X
-      </span>
-      <h1>{`أضافه اسعار جديده`}</h1>
-      <form>
-        <div className="formItem">
-          <label htmlFor="tubeNum">سعر المواسير :</label>
-          <input
-            name="tubeNum"
-            placeholder={"ادخل السعر للطن الواحد"}
-            type="number"
-            required
-            onChange={(e) => setTubeNum(e.target.value)}
-          />
-        </div>
-        <div className="formItem">
-          <label htmlFor="sandNum">سعر الرمل :</label>
-          <input
-            name="sandNum"
-            placeholder={"ادخل السعر للمتر الواحد"}
-            type="number"
-            required
-            onChange={(e) => setSandNum(e.target.value)}
-          />
-        </div>
-        <div className="formItem">
-          <label htmlFor="senNum">سعر السن :</label>
-          <input
-            name="senNum"
-            placeholder={"ادخل السعر للمتر الواحد"}
-            type="number"
-            required
-            onChange={(e) => setSenNum(e.target.value)}
-          />
-        </div>
-        <div className="formItem">
-          <label htmlFor="cementNum">سعر الاسمنت :</label>
-          <input
-            name="cementNum"
-            placeholder={"ادخل السعر للمتر الواحد"}
-            type="number"
-            required
-            onChange={(e) => setCementNum(e.target.value)}
-          />
-        </div>
-        <div className="formItem">
-          <label htmlFor="feNum">سعر الحديد :</label>
-          <input
-            name="feNum"
-            placeholder={"ادخل السعر للمتر الواحد"}
-            type="number"
-            required
-            onChange={(e) => setFeNum(e.target.value)}
-          />
-        </div>
-        <div className="formItem">
-          <label htmlFor="workerNum">سعر المصناعيه :</label>
-          <input
-            name="workerNum"
-            placeholder={"ادخل السعر للمتر الواحد"}
-            type="number"
-            required
-            onChange={(e) => setWorkerNum(e.target.value)}
-          />
-        </div>
-        <div className="formItem">
-          <label htmlFor="roomNum">سعر الغرف :</label>
-          <input
-            name="roomNum"
-            placeholder={"ادخل السعر للمتر الواحد"}
-            type="number"
-            required
-            onChange={(e) => setRoomNum(e.target.value)}
-          />
-        </div>
-        {analyicsData.type === "sarf" && (
-          <div className="formItem">
-            <label htmlFor="floorNum">سعر المطابق :</label>
+    <div className="">
+      <div className="deleteModal">
+        <span className="close" onClick={() => setAddOpen(false)}>
+          X
+        </span>
+        <h1>{`أضافه اسعار جديده`}</h1>
+        <form>
+          <div className="inputContainer">
+            <label htmlFor="tubeNum">سعر المواسير :</label>
             <input
-              name="floorNum"
-              placeholder={"ادخل السعر للمطبق الواحد"}
-              type="number"
-              onChange={(e) => setFloorNum(e.target.value)}
-            />
-          </div>
-        )}
-        {analyicsData.type === "sarf" && (
-          <div className="formItem">
-            <label htmlFor="houseNum">سعر الوصلات المنزليه :</label>
-            <input
-              name="houseNum"
-              placeholder={"ادخل السعر للمتر الواحد"}
-              type="number"
-              onChange={(e) => setHouseNum(e.target.value)}
-            />
-          </div>
-        )}
-        {analyicsData.type === "sarf" && (
-          <div className="formItem">
-            <label htmlFor="woodNum">سعر الاخشاب :</label>
-            <input
-              name="woodNum"
-              placeholder={"ادخل السعر للمتر الواحد"}
-              type="number"
-              onChange={(e) => setWoodNum(e.target.value)}
-            />
-          </div>
-        )}
-        {analyicsData.type === "sarf" && (
-          <div className="formItem">
-            <label htmlFor="blindNum">سعر التجفيف :</label>
-            <input
-              name="blindNum"
-              placeholder={"ادخل السعر للمتر الواحد"}
-              type="number"
-              onChange={(e) => setBlindNum(e.target.value)}
-            />
-          </div>
-        )}
-        <div className="formItem">
-          <label htmlFor="lockNum">سعر المحابس :</label>
-          <input
-            name="lockNum"
-            placeholder={"ادخل السعر للمتر الواحد"}
-            type="number"
-            required
-            onChange={(e) => setLockNum(e.target.value)}
-          />
-        </div>
-        {analyicsData.type === "water" && (
-          <div className="formItem">
-            <label htmlFor="waterNum">سعر وصلات المياه :</label>
-            <input
-              name="waterNum"
-              placeholder={"ادخل السعر للمقطعيه الواحده"}
+              name="tubeNum"
+              placeholder={"ادخل السعر للطن الواحد"}
               type="number"
               required
-              onChange={(e) => setWaterNum(e.target.value)}
+              onChange={(e) => setTubeNum(e.target.value)}
             />
           </div>
-        )}
-        {loading === true ? (
-          <span className="loader"></span>
-        ) : (
-          <button className="addButton" onClick={handleAdd}>
-            أضافه
-          </button>
-        )}
-      </form>
+          <div className="inputContainer">
+            <label htmlFor="sandNum">سعر الرمل :</label>
+            <input
+              name="sandNum"
+              placeholder={"ادخل السعر للمتر الواحد"}
+              type="number"
+              required
+              onChange={(e) => setSandNum(e.target.value)}
+            />
+          </div>
+          <div className="inputContainer">
+            <label htmlFor="senNum">سعر السن :</label>
+            <input
+              name="senNum"
+              placeholder={"ادخل السعر للمتر الواحد"}
+              type="number"
+              required
+              onChange={(e) => setSenNum(e.target.value)}
+            />
+          </div>
+          <div className="inputContainer">
+            <label htmlFor="cementNum">سعر الاسمنت :</label>
+            <input
+              name="cementNum"
+              placeholder={"ادخل السعر للمتر الواحد"}
+              type="number"
+              required
+              onChange={(e) => setCementNum(e.target.value)}
+            />
+          </div>
+          <div className="inputContainer">
+            <label htmlFor="feNum">سعر الحديد :</label>
+            <input
+              name="feNum"
+              placeholder={"ادخل السعر للمتر الواحد"}
+              type="number"
+              required
+              onChange={(e) => setFeNum(e.target.value)}
+            />
+          </div>
+          <div className="inputContainer">
+            <label htmlFor="workerNum">سعر المصناعيه :</label>
+            <input
+              name="workerNum"
+              placeholder={"ادخل السعر للمتر الواحد"}
+              type="number"
+              required
+              onChange={(e) => setWorkerNum(e.target.value)}
+            />
+          </div>
+          <div className="inputContainer">
+            <label htmlFor="roomNum">سعر الغرف :</label>
+            <input
+              name="roomNum"
+              placeholder={"ادخل السعر للمتر الواحد"}
+              type="number"
+              required
+              onChange={(e) => setRoomNum(e.target.value)}
+            />
+          </div>
+          {analyicsData.type === "sarf" && (
+            <div className="inputContainer">
+              <label htmlFor="floorNum">سعر المطابق :</label>
+              <input
+                name="floorNum"
+                placeholder={"ادخل السعر للمطبق الواحد"}
+                type="number"
+                onChange={(e) => setFloorNum(e.target.value)}
+              />
+            </div>
+          )}
+          {analyicsData.type === "sarf" && (
+            <div className="inputContainer">
+              <label htmlFor="houseNum">سعر الوصلات المنزليه :</label>
+              <input
+                name="houseNum"
+                placeholder={"ادخل السعر للمتر الواحد"}
+                type="number"
+                onChange={(e) => setHouseNum(e.target.value)}
+              />
+            </div>
+          )}
+          {analyicsData.type === "sarf" && (
+            <div className="inputContainer">
+              <label htmlFor="woodNum">سعر الاخشاب :</label>
+              <input
+                name="woodNum"
+                placeholder={"ادخل السعر للمتر الواحد"}
+                type="number"
+                onChange={(e) => setWoodNum(e.target.value)}
+              />
+            </div>
+          )}
+          {analyicsData.type === "sarf" && (
+            <div className="inputContainer">
+              <label htmlFor="blindNum">سعر التجفيف :</label>
+              <input
+                name="blindNum"
+                placeholder={"ادخل السعر للمتر الواحد"}
+                type="number"
+                onChange={(e) => setBlindNum(e.target.value)}
+              />
+            </div>
+          )}
+          <div className="inputContainer">
+            <label htmlFor="lockNum">سعر المحابس :</label>
+            <input
+              name="lockNum"
+              placeholder={"ادخل السعر للمتر الواحد"}
+              type="number"
+              required
+              onChange={(e) => setLockNum(e.target.value)}
+            />
+          </div>
+          {analyicsData.type === "water" && (
+            <div className="inputContainer">
+              <label htmlFor="waterNum">سعر وصلات المياه :</label>
+              <input
+                name="waterNum"
+                placeholder={"ادخل السعر للمقطعيه الواحده"}
+                type="number"
+                required
+                onChange={(e) => setWaterNum(e.target.value)}
+              />
+            </div>
+          )}
+          {loading === true ? (
+            <span className="loader"></span>
+          ) : (
+            <button className="addButton" onClick={handleAdd}>
+              أضافه
+            </button>
+          )}
+        </form>
+      </div>
     </div>
   );
 };
