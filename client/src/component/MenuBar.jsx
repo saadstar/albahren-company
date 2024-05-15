@@ -86,15 +86,15 @@ export const MenuBar = () => {
           to: '/addstore'
         },]
       }
-      // , {
-      // listHead: 'الخزنه',
-      // listBody: [
-      //   {
-      //     title: 'الخزنه',
-      //     icon: <PeopleOutlinedIcon className='icon'/>,
-      //     to: '/save'
-      //   }]
-      // }        
+      , {
+      listHead: 'الخزنه',
+      listBody: [
+        {
+          title: 'الخزنه',
+          icon: <PeopleOutlinedIcon className='icon'/>,
+          to: '/save'
+        }]
+      }        
       , {
       listHead: 'المرتبات',
       listBody: [
