@@ -2,10 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Menu } from "../../Menu/Menu";
 import {
   DataGrid,
-  GridToolbarContainer,
   GridToolbarExport,
 } from "@mui/x-data-grid";
-import { styled } from "@mui/system";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { AddTubes } from "./AddTubes";
@@ -151,10 +149,6 @@ export const Tubes = ({ type, ar }) => {
   useEffect(() => {
     fetchRow();
   });
-  // style toolbar export button
-  const StyledGridToolbarExport = styled(GridToolbarExport)(({ theme }) =>( {
-    color: "white",
-  }));
   return (
     <div className="app">
       <Menu style={{ marginTop: "120px" }} />
@@ -217,9 +211,9 @@ export const Tubes = ({ type, ar }) => {
                   columns={columns}
                   components={{
                     Toolbar: () => (
-                      <GridToolbarContainer>
-                        <StyledGridToolbarExport/>
-                      </GridToolbarContainer>
+                      <Box sx={{ color: "white" }}>
+                        <GridToolbarExport sx={{ color: "white !important" }} />
+                      </Box>
                     ),
                   }}
                 />

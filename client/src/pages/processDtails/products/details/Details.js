@@ -4,10 +4,8 @@ import axios from "axios";
 import { Menu } from "../../Menu/Menu";
 import {
   DataGrid,
-  GridToolbarContainer,
   GridToolbarExport,
 } from "@mui/x-data-grid";
-import { styled } from "@mui/system";
 import { AddDetails } from "./AddDetails";
 import { DeleteDetails } from "./DeleteDetails";
 import "../../../usersFeatures/user.css";
@@ -107,11 +105,7 @@ export const Details = ({ sort, ar }) => {
       createdAt: item.createdAt.split("T")[0],
       entry: user.username,
     };
-  });
-  // style toolbar export button
-  const StyledGridToolbarExport = styled(GridToolbarExport)(({ theme }) => ({
-    color: "white",
-  }));
+  });  
   return (
     <div className="app">
       <Menu style={{ marginTop: "120px" }} />
@@ -165,9 +159,9 @@ export const Details = ({ sort, ar }) => {
                   columns={columns}
                   components={{
                     Toolbar: () => (
-                      <GridToolbarContainer>
-                        <StyledGridToolbarExport />
-                      </GridToolbarContainer>
+                      <Box sx={{ color: "white" }}>
+                        <GridToolbarExport sx={{ color: "white !important" }} />
+                      </Box>
                     ),
                   }}
                 />

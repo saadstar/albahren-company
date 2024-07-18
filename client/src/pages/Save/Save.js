@@ -3,10 +3,8 @@ import "./save.css";
 import axios from "axios";
 import {
   DataGrid,
-  GridToolbarContainer,
   GridToolbarExport,
 } from "@mui/x-data-grid";
-import { styled } from "@mui/system";
 import { ShowImg } from "./ShowImg";
 import { DeleteSave } from "./DeleteSave";
 import { AuthContext } from "../../auth/authContext/authContext";
@@ -172,10 +170,6 @@ export const Save = () => {
       proccessName: item.proccessName,
     };
   });
-  // style toolbar export button
-  const StyledGridToolbarExport = styled(GridToolbarExport)(({ theme }) => ({
-    color: "white",
-  }));
   return (
     <div className="users">
       {rowData.length === 0 ? (
@@ -246,9 +240,9 @@ export const Save = () => {
                 columns={columns}
                 components={{
                   Toolbar: () => (
-                    <GridToolbarContainer>
-                      <StyledGridToolbarExport />
-                    </GridToolbarContainer>
+                    <Box sx={{color:"white"}}>
+                      <GridToolbarExport sx={{color:"white !important"}} />
+                    </Box>
                   ),
                 }}
               />
