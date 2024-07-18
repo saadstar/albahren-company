@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Menu } from "../../Menu/Menu";
-import { DataGrid } from "@mui/x-data-grid";
+import {
+  DataGrid,
+  GridToolbarContainer,
+  GridToolbarExport,
+} from "@mui/x-data-grid";
+import { styled } from "@mui/system";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { AddWood } from "./AddWood";
@@ -138,6 +143,10 @@ export const Wood = ({ ar, type }) => {
   useEffect(() => {
     fetchRow();
   });
+  // style toolbar export button
+  const StyledGridToolbarExport = styled(GridToolbarExport)(({ theme }) => ({
+    color: "white",
+  }));
   return (
     <div className="app">
       <Menu style={{ marginTop: "120px" }} />
@@ -186,7 +195,24 @@ export const Wood = ({ ar, type }) => {
                   },
                 }}
               >
-                <DataGrid rows={rows} columns={columns} />
+                <DataGrid
+                  rows={rows}
+                  columns={columns}
+                  components={{
+                    Toolbar: () => (
+                      <GridToolbarContainer>
+                        <StyledGridToolbarExport />
+                      </GridToolbarContainer>
+                    ),
+                  }}
+                  components={{
+                    Toolbar: () => (
+                      <GridToolbarContainer>
+                        <StyledGridToolbarExport />
+                      </GridToolbarContainer>
+                    ),
+                  }}
+                />
               </Box>
             ) : (
               <>

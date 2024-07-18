@@ -354,7 +354,7 @@ border: 1px solid #FFB801;
      margin: 80px 10px 0px 10px;
  }
  .inputContainer input {
-     width: 80vw;
+     width: 40vw;
  }
  .addWrapper .inputButtons {
      display: flex;

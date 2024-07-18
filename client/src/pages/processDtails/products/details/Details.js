@@ -2,7 +2,12 @@ import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Menu } from "../../Menu/Menu";
-import { DataGrid } from "@mui/x-data-grid";
+import {
+  DataGrid,
+  GridToolbarContainer,
+  GridToolbarExport,
+} from "@mui/x-data-grid";
+import { styled } from "@mui/system";
 import { AddDetails } from "./AddDetails";
 import { DeleteDetails } from "./DeleteDetails";
 import "../../../usersFeatures/user.css";
@@ -103,6 +108,10 @@ export const Details = ({ sort, ar }) => {
       entry: user.username,
     };
   });
+  // style toolbar export button
+  const StyledGridToolbarExport = styled(GridToolbarExport)(({ theme }) => ({
+    color: "white",
+  }));
   return (
     <div className="app">
       <Menu style={{ marginTop: "120px" }} />
@@ -151,7 +160,17 @@ export const Details = ({ sort, ar }) => {
                   },
                 }}
               >
-                <DataGrid rows={rows} columns={columns} />
+                <DataGrid
+                  rows={rows}
+                  columns={columns}
+                  components={{
+                    Toolbar: () => (
+                      <GridToolbarContainer>
+                        <StyledGridToolbarExport />
+                      </GridToolbarContainer>
+                    ),
+                  }}
+                />
               </Box>
             ) : (
               <>

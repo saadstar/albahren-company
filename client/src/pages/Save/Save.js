@@ -1,7 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./save.css";
 import axios from "axios";
-import { DataGrid } from "@mui/x-data-grid";
+import {
+  DataGrid,
+  GridToolbarContainer,
+  GridToolbarExport,
+} from "@mui/x-data-grid";
+import { styled } from "@mui/system";
 import { ShowImg } from "./ShowImg";
 import { DeleteSave } from "./DeleteSave";
 import { AuthContext } from "../../auth/authContext/authContext";
@@ -109,7 +114,7 @@ export const Save = () => {
       width: 110,
       renderCell: (params) => {
         const showHandler = () => {
-          if (window.scrollY != 0) {
+          if (window.scrollY !== 0) {
             window.scrollTo(0, window.scrollY === 0);
           }
           setShowData(params.row);
@@ -167,6 +172,10 @@ export const Save = () => {
       proccessName: item.proccessName,
     };
   });
+  // style toolbar export button
+  const StyledGridToolbarExport = styled(GridToolbarExport)(({ theme }) => ({
+    color: "white",
+  }));
   return (
     <div className="users">
       {rowData.length === 0 ? (
@@ -232,7 +241,17 @@ export const Save = () => {
                 },
               }}
             >
-              <DataGrid rows={rows} columns={columns} />
+              <DataGrid
+                rows={rows}
+                columns={columns}
+                components={{
+                  Toolbar: () => (
+                    <GridToolbarContainer>
+                      <StyledGridToolbarExport />
+                    </GridToolbarContainer>
+                  ),
+                }}
+              />
             </Box>
           )}
         </div>
